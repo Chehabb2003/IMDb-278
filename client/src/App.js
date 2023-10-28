@@ -1,17 +1,18 @@
-// import { useState, useEffect } from "react";
-import Navbar from './Navbar';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
+import MainContent from './MainContent';
+import Registration from './Registration';
+import SignUp from './SignUp'
+import SignIn from './SignIn'
 
 const App = () => {
   return (
     <Router>
-      <div className="app">
-        <Navbar />
-        <Routes>
-          <Route />
-        </Routes>
-      </div>
+      <MainContent />
+      <Routes>
+        <Route path='/registration' element={<Registration />} />
+        <Route path='/signup' element={<SignUp />} />
+        <Route path='/signin' element={<SignIn />} />
+      </Routes>
     </Router>
   );
 }
