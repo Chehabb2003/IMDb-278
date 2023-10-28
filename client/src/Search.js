@@ -2,8 +2,8 @@ import { useParams } from "react-router-dom";
 
 const Search = () => {
     const { searchvalue } = useParams();
-     
-    //here we fetch item from db 
+
+    //here we fetch item from db  
 
     return (
         <div className="search">
