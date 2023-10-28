@@ -239,16 +239,21 @@ body {
     font-weight: bold;
 }
 
-.signup .signup-div,.signup .createacc-div {
+.signup .signup-div,
+.signup .createacc-div {
     margin-bottom: 15px;
     width: 100%;
 }
 
-.signup .createacc-div{
+.signup .createacc-div {
     padding: 10px;
 }
 
 .signup p {
     margin-top: 20px;
     font-size: 14px;
+}
+
+.signup .error{
+    color: red;
 }
