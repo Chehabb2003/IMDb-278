@@ -1,3 +1,4 @@
+import './signup.css'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -57,9 +58,6 @@ const SignUp = () => {
         }
 
     }
-
-
-
 
     return (
         <div className="signup">

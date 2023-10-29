@@ -1,10 +1,12 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import MainContent from './MainContent';
+import MainContent from './Header';
 import Registration from './Registration';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
 import Search from './Search';
 import HomePage from './HomePage';
+import WatchList from './WatchList';
+import Footer from './Footer';
 
 const App = () => {
   return (
@@ -17,8 +19,10 @@ const App = () => {
           <Route path='/signup' element={<SignUp />} />
           <Route path='/signin' element={<SignIn />} />
           <Route path='/search/:searchvalue' element={<Search />} />
+          <Route path='/watchlist' element={<WatchList />} />
         </Routes>
       </div>
+      <Footer />
 
     </Router>
   );

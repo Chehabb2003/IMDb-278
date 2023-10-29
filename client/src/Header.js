@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
-const MainContent = () => {
+const Header = () => {
     const location = useLocation();
     const pathsWoutNav = ['/signin', '/signup'];
 
@@ -12,4 +12,4 @@ const MainContent = () => {
     );
 }
 
-export default MainContent;
+export default Header;

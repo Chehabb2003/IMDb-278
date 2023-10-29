@@ -1,8 +1,10 @@
-body {
-    margin: 0px;
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-.navbar {
+/* .navbar {
     display: flex;
     align-items: center;
     padding: 10px 20px;
@@ -168,7 +170,6 @@ body {
 .registration img {
     height: 20px;
     margin-right: 10px;
-    /* display: block; */
     vertical-align: middle;
 }
 
@@ -254,6 +255,6 @@ body {
     font-size: 14px;
 }
 
-.signup .error{
+.signup .error {
     color: red;
-}
+} */
