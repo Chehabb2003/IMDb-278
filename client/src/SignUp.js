@@ -59,24 +59,27 @@ const SignUp = () => {
 
     }
 
+
+
+
     return (
-        <div className="signup">
+        <div className="shared-signin-signup">
             <Link to='/'><button>IMDb</button></Link>
             {ErrorData.name && <p className='error'>Please enter a valid name</p>}
             {ErrorData.email && <p className='error'>Please enter a valid email </p>}
             {ErrorData.password && <p className='error'>Please enter a valid password</p>}
             {ErrorData.password_match && <p className='error'>Please make sure passwords match</p>}
-            <div className='signup-container'>
+            <div className='shared-signin-signup-container'>
                 <form onSubmit={handleCreation}>
                     <h1>Create an account</h1>
-                    <div className='signup-div'>
+                    <div className='shared-signin-signup-div'>
                         <label>Your name <br />
                             <input type="text"
                                 value={name}
                                 onChange={(e) => SetName(e.target.value)}
                                 placeholder="First and last name" /></label>
                     </div>
-                    <div className='signup-div'>
+                    <div className='shared-signin-signup-div'>
                         <label>Email <br />
                             <input type="text"
                                 value={email}
@@ -84,7 +87,7 @@ const SignUp = () => {
                             /></label>
 
                     </div>
-                    <div className='signup-div'>
+                    <div className='shared-signin-signup-div'>
                         <label>Password <br />
                             <input type="password"
                                 value={password}
@@ -92,7 +95,7 @@ const SignUp = () => {
                             /></label>
 
                     </div>
-                    <div className='signup-div'>
+                    <div className='shared-signin-signup-div'>
                         <label>Re-enter Password<br />
                             <input type="password"
                                 value={retypepassword}
@@ -103,8 +106,8 @@ const SignUp = () => {
                     <div className='createacc-div'>
                         <button>Create your IMDb account</button>
                     </div>
-                    <div className='signup-div'>
-                        <p>Already have an account? <Link to='/signin'>Sign in</Link></p>
+                    <div className='shared-signin-signup-div'>
+                        <p>Already have an account? <Link to='/signin'>Sign In</Link></p>
                     </div>
                 </form>
             </div>
