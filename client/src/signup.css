@@ -1,4 +1,4 @@
-.shared-signin-signup {
+.signup {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -8,7 +8,7 @@
     gap: 10px;
 }
 
-.shared-signin-signup-container {
+.signup-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,16 +21,16 @@
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
-.shared-signin-signup form {
+.signup form {
     width: 100%;
 }
 
-.shared-signin-signup h1 {
+.signup h1 {
     margin-bottom: 20px;
     font-size: 24px;
 }
 
-.shared-signin-signup button {
+.signup button {
     background-color: #FFC107;
     color: #000;
     border: none;
@@ -41,12 +41,12 @@
     width: 100%;
 }
 
-.shared-signin-signup button:hover {
+.signup button:hover {
     background-color: #e5a600;
 }
 
-.shared-signin-signup input[type='text'],
-.shared-signin-signup input[type='password'] {
+.signup input[type='text'],
+.signup input[type='password'] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -55,32 +55,31 @@
     margin-left: 0px;
 }
 
-.shared-signin-signup label {
+.signup label {
     display: block;
     margin-bottom: 10px;
     font-weight: bold;
 }
-.shared-signin-signup .shared-signin-signup-div,
-.shared-signin-signup .createacc-div,
-.shared-signin-signup .signin-div {
+
+.signup .signup-div,
+.signup .createacc-div {
     margin-bottom: 15px;
     width: 100%;
 }
 
-.shared-signin-signup .createacc-div,
-.shared-signin-signup .signin-div {
+.signup .createacc-div {
     padding: 10px;
 }
 
-.shared-signin-signup p {
+.signup p {
     margin-top: 20px;
     font-size: 14px;
 }
 
-.shared-signin-signup .error {
+.signup .error {
     color: red;
 }
 
-.shared-signin-signup a{
+.signup a{
     width: 10%;
 }

@@ -1,4 +1,4 @@
-import './signinup.css'
+import './signin.css'
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -40,14 +40,14 @@ const Signin = () => {
 
 
   return (
-    <div className="shared-signin-signup">
+    <div className="signin">
             <Link to='/'><button>IMDb</button></Link>
             {ErrorData.email && <p className='error'>Please enter a valid email </p>}
             {ErrorData.password && <p className='error'>Please enter a valid password</p>}
-            <div className='shared-signin-signup-container'>
+            <div className='signin-container'>
                 <form onSubmit={handleSignIn}>
                     <h1>Sign In</h1>
-                    <div className='shared-signin-signup-div'>
+                    <div className='signin-div'>
                         <label>Email <br />
                             <input type="text"
                                 value={email}
@@ -55,7 +55,7 @@ const Signin = () => {
                             /></label>
 
                     </div>
-                    <div className='shared-signin-signup-div'>
+                    <div className='signin-div'>
                         <label>Password <br />
                             <input type="password"
                                 value={password}
@@ -66,7 +66,7 @@ const Signin = () => {
                     <div className='signin-div'>
                         <button>Sign In</button>
                     </div>
-                    <div className='shared-signin-signup-div'>
+                    <div className='signin-div'>
                         <p>Don't have an account? <Link to='/signup'>Sign Up</Link></p>
                     </div>
                 </form>
