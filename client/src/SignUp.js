@@ -12,7 +12,7 @@ const SignUp = () => {
     });
 
     const IsValidName = () => {
-        const regexName = new RegExp("^[a-zA-Z]+([-\s][a-zA-Z]+)*$");
+        const regexName = new RegExp("^[a-zA-Z]+([-\\s][a-zA-Z]+)*$");
         return regexName.test(name);
 
     }
