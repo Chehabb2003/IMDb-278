@@ -1,4 +1,4 @@
-import './signup.css'
+import './signinup.css'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
