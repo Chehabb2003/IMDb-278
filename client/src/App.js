@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import MainContent from './Header';
-import Registration from './Registration';
-import SignUp from './SignUp';
-import SignIn from './SignIn';
-import Search from './Search';
-import HomePage from './HomePage';
-import WatchList from './WatchList';
-import Footer from './Footer';
+import MainContent from './components/Header';
+import Registration from './components/Registration';
+import SignUp from './components/SignUp';
+import SignIn from './components/SignIn';
+import Search from './components/Search';
+import HomePage from './components/HomePage';
+import WatchList from './components/WatchList';
+import Footer from './components/Footer';
 
 const App = () => {
   return (

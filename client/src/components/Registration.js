@@ -1,4 +1,4 @@
-import './registration.css';
+import '../styles/registration.css';
 import { useNavigate } from 'react-router-dom';
 const Registration = () => {
     const navigate = useNavigate();

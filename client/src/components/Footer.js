@@ -1,4 +1,4 @@
-import './footer.css';
+import '../styles/footer.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from 'react-router-dom';
 
