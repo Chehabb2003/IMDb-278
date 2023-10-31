@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <div className="footer">
             <div className="first-div">
-                <Link to='/signin'>
+                <Link to='/registration'>
                     <button>Sign in for more access</button>
                 </Link>
             </div>
