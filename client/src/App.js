@@ -22,11 +22,9 @@ const App = () => {
           <Route path='/search/:searchvalue' element={<Search />} />
           <Route path='/watchlist' element={<WatchList />} />
           <Route path='/movies-db' element={<MoviesDb />} />
-
         </Routes>
       </div>
       <Footer />
-
     </Router >
   );
 }
