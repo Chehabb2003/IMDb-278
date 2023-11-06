@@ -1,7 +1,10 @@
-import { useParams } from "react-router-dom";
+import { /*useParams,*/ useLocation } from "react-router-dom";
 
 const Search = () => {
-    const { searchvalue } = useParams();
+    // const { searchvalue } = useParams();
+    const location = useLocation();
+    const SearchParamas = new URLSearchParams(location.search);
+    const searchvalue = SearchParamas.get('q');
 
     //here we fetch item from db  
 

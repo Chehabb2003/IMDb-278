@@ -8,7 +8,7 @@ const Navbar = () => {
     const nagivate = useNavigate();
     const handleSearch = (e) => {
         if (e.key === 'Enter') {
-            nagivate('/search/' + searchValue);
+            nagivate(`/search?q=${searchValue}`);
         }
     }
 
