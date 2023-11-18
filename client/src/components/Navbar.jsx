@@ -11,6 +11,7 @@ const Navbar = () => {
             nagivate(`/search?q=${searchValue}`);
         }
     }
+    
 
     return (
         <nav className="navbar">

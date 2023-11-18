@@ -86,35 +86,40 @@ const MoviesDb = () => {
                             type="text"
                             name="name"
                             value={addFormData.name}
-                            onChange={handleAddChange} />
+                            onChange={handleAddChange}
+                            required />
                     </label><br />
                     <label>Genre
                         <input
                             type="text"
                             name="genre"
                             value={addFormData.genre}
-                            onChange={handleAddChange} />
+                            onChange={handleAddChange}
+                            required />
                     </label><br />
                     <label>Director
                         <input
                             type="text"
                             name="director"
                             value={addFormData.director}
-                            onChange={handleAddChange} />
+                            onChange={handleAddChange}
+                            required />
                     </label><br />
                     <label>Writer
                         <input
                             type="text"
                             name="writer"
                             value={addFormData.writer}
-                            onChange={handleAddChange} />
+                            onChange={handleAddChange}
+                            required />
                     </label><br />
                     <label>Star
                         <input
                             type="text"
                             name="star"
                             value={addFormData.star}
-                            onChange={handleAddChange} />
+                            onChange={handleAddChange}
+                            required />
                     </label><br />
                     <button>Add</button>
                 </form>
@@ -125,7 +130,8 @@ const MoviesDb = () => {
                         <input
                             type="text"
                             value={id}
-                            onChange={(e) => SetId(e.target.value)} />
+                            onChange={(e) => SetId(e.target.value)}
+                            required />
                     </label>
                     <button>Delete</button>
                 </form>
