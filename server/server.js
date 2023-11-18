@@ -53,7 +53,10 @@ app.post('/signin', async (req, res) => {
         } else {
             const isMatch = await bcrypt.compare(password, user.data().password);
             if (isMatch) {
-                res.json('success');
+                res.send({
+                    name: user.data().name,
+                    email: user.data().email
+                })
             } else {
                 res.json('password incorrect');
             }
@@ -62,6 +65,9 @@ app.post('/signin', async (req, res) => {
         console.log(error);
     }
 });
+
+
+
 
 
 app.listen(5000, () => console.log('listening on port 5000'))

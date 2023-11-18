@@ -90,7 +90,7 @@ const SignUp = () => {
             else if (data === 'user created') {
                 SetEmailExists(false);
                 console.log('success');
-                navigate('/');
+                navigate('/registration');
             }
         }
         catch (error) {

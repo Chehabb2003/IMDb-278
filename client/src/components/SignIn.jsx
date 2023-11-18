@@ -61,6 +61,7 @@ const Signin = () => {
                 body: JSON.stringify(signInInfo)
             })
             const data = await response.json();
+            console.log(data);
             switch (data) {
                 case 'email not found':
                     SetEmailNotFound(true);
@@ -74,7 +75,9 @@ const Signin = () => {
                     SetEmailNotFound(false);
                     SetIncorrectPassword(false);
                     console.log('access granted');
+                    window.localStorage.setItem('token', JSON.stringify(data))
                     navigate('/');
+
             }
         }
         catch (error) {

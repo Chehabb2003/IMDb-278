@@ -38,7 +38,8 @@
     font-size: 16px;
 }
 
-.navbar button {
+.navbar button,
+select {
     padding: 8px 15px;
     border: none;
     border-radius: 4px;
