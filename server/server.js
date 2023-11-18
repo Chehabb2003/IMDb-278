@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const bcrypt = require('bcrypt')
-// const firestore = require('firebase/firestore');
 const { db, collection, getDocs, addDoc } = require('./config');
 
 
@@ -63,7 +62,6 @@ app.post('/signin', async (req, res) => {
         console.log(error);
     }
 });
-
 
 
 app.listen(5000, () => console.log('listening on port 5000'))
