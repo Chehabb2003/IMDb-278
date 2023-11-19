@@ -1,14 +1,14 @@
 import '../styles/navbar.css';
-import { Link, Navigate, redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ user, setUser }) => {
     const [searchValue, SetSearchValue] = useState('');
     const navigate = useNavigate();
     // const [selectedOption, SetSelectedOption] = useState('Profile');
     let name;
-    const user = JSON.parse(window.localStorage.getItem('token'));
+    // const user = JSON.parse(window.localStorage.getItem('token'));
     if (user) {
         name = user.name;
     }
@@ -23,18 +23,18 @@ const Navbar = () => {
         e.target.value = name;
         switch (value) {
             case 'view-profile':
-                // navigate('/profile');
+                navigate('/profile');
                 break;
             case 'watchlist':
                 navigate('/watchlist');
                 break;
             case 'sign-out':
                 window.localStorage.clear();
+                setUser(null);
                 navigate('/');
                 break;
             case 'ratings':
-                window.localStorage.clear();
-                navigate('/');
+                // navigate('/');
                 break;
             default:
                 break;

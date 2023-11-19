@@ -2,7 +2,7 @@ import '../styles/signin.css'
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-const Signin = () => {
+const Signin = ({ user, setUser }) => {
     const navigate = useNavigate();
     const [signInInfo, setSignInInfo] = useState({
         email: '',
@@ -76,6 +76,7 @@ const Signin = () => {
                     SetIncorrectPassword(false);
                     console.log('access granted');
                     window.localStorage.setItem('token', JSON.stringify(data))
+                    setUser(JSON.parse(window.localStorage.getItem('token')));
                     navigate('/');
 
             }
@@ -110,7 +111,6 @@ const Signin = () => {
                                 value={signInInfo.password}
                                 onChange={handleOnChange}
                             /></label>
-
                     </div>
                     <div className='signin-div'>
                         <button>Sign In</button>

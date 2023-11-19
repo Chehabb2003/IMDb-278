@@ -1,13 +1,15 @@
 import '../styles/footer.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
-const Footer = () => {
+const Footer = ({ user }) => {
+    // const user = window.localStorage.getItem('token');
     return (
         <div className="footer">
             <div className="first-div">
                 <Link to='/registration'>
-                    <button>Sign in for more access</button>
+                    {!user && <button>Sign in for more access</button>}
                 </Link>
             </div>
             <div className="second-div">
