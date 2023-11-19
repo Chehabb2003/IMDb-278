@@ -1,5 +1,5 @@
 const { initializeApp } = require('@firebase/app');
-const { getFirestore, collection, getDocs, addDoc } = require('@firebase/firestore');
+const { getFirestore, collection, getDocs, addDoc, updateDoc } = require('@firebase/firestore');
 
 const firebaseConfig = {
     apiKey: "AIzaSyAGyDi7ib62yH7MOLxk9Vz7D8haqcH6mv4",
@@ -12,5 +12,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const usersRef = collection(db, 'users')
 
-module.exports = { db, collection, getDocs, addDoc };
+module.exports = { db, getDocs, addDoc, usersRef, updateDoc };

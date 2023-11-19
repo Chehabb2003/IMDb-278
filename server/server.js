@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const bcrypt = require('bcrypt')
-const { db, collection, getDocs, addDoc } = require('./config');
+const { db, getDocs, addDoc, usersRef, updateDoc } = require('./config');
+const admin = require('firebase-admin');
 
 
 app.use(express.json());
@@ -13,7 +14,7 @@ app.use(cors({ origin: 'http://localhost:3000' }));
 
 app.post('/signup', async (req, res) => {
     const { name, email, password } = req.body;
-    const usersRef = collection(db, 'users');
+    // const usersRef = collection(db, 'users');
     try {
         const snapshot = await getDocs(usersRef);
         const emailFound = snapshot.docs.some(doc => doc.data().email === email);
@@ -27,7 +28,11 @@ app.post('/signup', async (req, res) => {
             const newUser = {
                 name,
                 email,
-                password: hashedpassword
+                password: hashedpassword,
+                gender: '',
+                dateOfBirth: '',
+                country: '',
+                // createdAt: admin.firestore.FieldValue.serverTimestamp()
             }
             addDoc(usersRef, newUser)
             res.json('user created')
@@ -42,7 +47,7 @@ app.post('/signup', async (req, res) => {
 
 app.post('/signin', async (req, res) => {
     const { password, email } = req.body;
-    const usersRef = collection(db, 'users');
+    // const usersRef = collection(db, 'users');
     let user = {};
 
     try {
@@ -67,8 +72,44 @@ app.post('/signin', async (req, res) => {
 });
 
 
+app.post('/profile', async (req, res) => {
+    const { email } = req.body;
+    try {
+        // const usersRef = collection(db, 'users');
+        const snapshot = await getDocs(usersRef);
+        const user = snapshot.docs.find(doc => doc.data().email === email);
+        if (user !== undefined) {
+            res.json(user.data());
+            return;
+        }
+    }
+    catch (error) {
+        console.log(error)
+        res.status(500).send('Error');
+    }
+});
 
-
+app.put('/profile', async (req, res) => {
+    const { gender, dateOfBirth, country, email, dateJoined } = req.body;
+    console.log(gender);
+    try {
+        const updatedUser = {
+            gender,
+            dateOfBirth,
+            country,
+            // dateJoined,
+        }
+        const snapshot = await getDocs(usersRef);
+        const user = snapshot.docs.find(doc => doc.data().email === email);
+        await updateDoc(user.ref, updatedUser);
+        console.log('User profile updated successfully');
+        res.json('saved');
+    }
+    catch (error) {
+        res.status(500).send('error');
+        console.error('Error updating document', error);
+    }
+})
 
 app.listen(5000, () => console.log('listening on port 5000'))
 
