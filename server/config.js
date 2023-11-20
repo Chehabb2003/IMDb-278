@@ -12,6 +12,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const moviesRef = collection(db, 'movies');
 const usersRef = collection(db, 'users')
 
-module.exports = { db, getDocs, addDoc, usersRef, updateDoc };
+module.exports = { db, getDocs, addDoc, usersRef, updateDoc, moviesRef };
