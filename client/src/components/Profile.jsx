@@ -1,17 +1,29 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-const Profile = () => {
-    const user = JSON.parse(window.localStorage.getItem('token'));
+// import fetchToken from "../utils/tokenapi";
+const Profile = ({ user, setUser }) => {
     let email, username;
-    if (user) {
-        email = user.email;
-        username = user.name;
-    }
     useEffect(() => {
         const fetchData = async () => {
+            const response = await fetch('http://localhost:5000/token', {
+                headers: {
+                    Authorization: `Bearer ${window.localStorage.getItem('token')}`
+                }
+            });
+
+            const data = await response.json();
+            if (data === 'token expired') {
+                alert("Session expired. Please log in again.");
+                window.localStorage.removeItem('token');
+                navigate('/registration');
+            }
+            const user = data;
+            // const user = await fetchToken();
             if (!user) {
                 navigate('/registration')
             }
+            username = user.name;
+            email = user.email;
             try {
                 const response = await fetch('http://localhost:5000/profile', {
                     method: 'POST',
@@ -32,7 +44,6 @@ const Profile = () => {
                 console.log(error);
             }
         }
-
         fetchData();
     }, []);
 
@@ -72,10 +83,20 @@ const Profile = () => {
             }
             const response = await fetch('http://localhost:5000/profile', {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${window.localStorage.getItem('token')}`
+                },
                 body: JSON.stringify(updatedData)
             })
             const data = await response.json();
+            console.log('data');
+            if (data === 'token expired') {
+                alert("Session expired. Please log in again.");
+                window.localStorage.removeItem('token');
+                setUser(null);
+                navigate('/registration');
+            }
             if (data === 'saved') {
                 setIsEditing(!isEditing);
             }
@@ -84,11 +105,6 @@ const Profile = () => {
             console.log(error);
         }
     }
-
-    if (!user) {
-        return <div>Please log in to view this page.</div>;
-    }
-
     return (
 
         <div className="user-profile">
@@ -110,7 +126,7 @@ const Profile = () => {
                     </label>
                     <label>
                         Date of Birth:
-                        <input type="date" name="dateOfBirth" value={profiledata.dateOfBirth} onChange={handleChange} />
+                        <input type="date" name="sdateOfBirth" value={profiledata.dateOfBirth} onChange={handleChange} />
                     </label>
                     <label>
                         Country:

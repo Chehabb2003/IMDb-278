@@ -1,7 +1,6 @@
 import '../styles/footer.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
 
 const Footer = ({ user }) => {
     // const user = window.localStorage.getItem('token');

@@ -12,7 +12,9 @@ const MoviesDb = () => {
         genre: '',
         director: '',
         writer: '',
-        star: ''
+        star: '',
+        image: '',
+
     }
 
     const [addFormData, setAddFormData] = useState({
@@ -20,7 +22,9 @@ const MoviesDb = () => {
         genre: '',
         director: '',
         writer: '',
-        star: ''
+        star: '',
+        image: '',
+
     })
 
     const [id, SetId] = useState('');
@@ -75,6 +79,7 @@ const MoviesDb = () => {
         fetchMoviesDb();
     }
 
+
     return (
         <div>
             <Link to='/'>Back to IMDb</Link>
@@ -121,6 +126,15 @@ const MoviesDb = () => {
                             onChange={handleAddChange}
                             required />
                     </label><br />
+                    <label>Image
+                        <input
+                            type="text"
+                            name="image"
+                            value={addFormData.image}
+                            onChange={handleAddChange}
+                            required />
+                    </label><br />
+
                     <button>Add</button>
                 </form>
 

@@ -6,7 +6,8 @@ const Signin = ({ user, setUser }) => {
     const navigate = useNavigate();
     const [signInInfo, setSignInInfo] = useState({
         email: '',
-        password: ''
+        password: '',
+        rememberMe: false,
     })
     const [ErrorData, SetErrorData] = useState({ email: false, password: false });
     const [emailNotFound, SetEmailNotFound] = useState(false);
@@ -61,7 +62,7 @@ const Signin = ({ user, setUser }) => {
                 body: JSON.stringify(signInInfo)
             })
             const data = await response.json();
-            console.log(data);
+            // console.log(data);
             switch (data) {
                 case 'email not found':
                     SetEmailNotFound(true);
@@ -75,10 +76,15 @@ const Signin = ({ user, setUser }) => {
                     SetEmailNotFound(false);
                     SetIncorrectPassword(false);
                     console.log('access granted');
-                    window.localStorage.setItem('token', JSON.stringify(data))
-                    setUser(JSON.parse(window.localStorage.getItem('token')));
+                    window.localStorage.setItem('token', data.accessToken);
+                    // const response1 = await fetch('http://localhost:5000/token', {
+                    //     headers: {
+                    //         Authorization: `Bearer ${window.localStorage.getItem('token')}`
+                    //     }
+                    // });
+                    // const data1 = await response1.json();
+                    setUser(data.userPayload);
                     navigate('/');
-
             }
         }
         catch (error) {
@@ -115,6 +121,8 @@ const Signin = ({ user, setUser }) => {
                     <div className='signin-div'>
                         <button>Sign In</button>
                     </div>
+                    <input type="checkbox" name="rememberMe" checked={signInInfo.rememberMe} onChange={handleOnChange} />&nbsp;
+                    <span htmlFor="rememberMe">Remember me</span>
                     <div className='signin-div'>
                         <p>Don't have an account? <Link to='/signup'>Sign Up</Link></p>
                     </div>

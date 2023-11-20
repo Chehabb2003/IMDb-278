@@ -12,17 +12,30 @@ import { useEffect, useState } from 'react';
 import Profile from './components/Profile';
 
 const App = () => {
-  const [user, setUser] = useState(JSON.parse(window.localStorage.getItem('token')));
+
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const handleStorageChange = () => {
-      setUser(JSON.parse(window.localStorage.getItem('token')));
+    const handleStorageChange = async () => {
+      const response = await fetch('http://localhost:5000/token', {
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem('token')}`
+        }
+      });
+      const data = await response.json();
+      if (data !== 'token expired') {
+        setUser(data);
+      }
+      else {
+        setUser(null);
+      }
     };
-    window.addEventListener('storage', handleStorageChange);
+    // window.addEventListener('storage', handleStorageChange);
 
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    }
+    // return () => {
+    //   window.removeEventListener('storage', handleStorageChange);
+    // }
+    handleStorageChange();
   }, []);
 
   return (
@@ -37,7 +50,7 @@ const App = () => {
           <Route path='/search' element={<Search />} />
           <Route path='/watchlist' element={<WatchList />} />
           <Route path='/movies-db' element={<MoviesDb />} />
-          <Route path='/profile' element={<Profile />} />
+          <Route path='/profile' element={<Profile user={user} setUser={setUser} />} />
         </Routes>
       </div>
       <Footer user={user} />
