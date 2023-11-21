@@ -159,5 +159,21 @@ app.get('/movies', async (req, res) => {
     }
 })
 
+app.get('/comingsoon', async (req, res) => {
+    try {
+        const snapshot = await getDocs(moviesRef.where('status', '==', 'coming soon'));
+        const movies = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
+        console.log(movies);
+        res.json(movies);
+    }
+    catch (err) {
+        res.status(500).send('error');
+        console.error('Error fetching coming soon movies', err);
+    }
+});
+
 app.listen(5000, () => console.log('listening on port 5000'))
 

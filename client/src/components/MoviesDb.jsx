@@ -14,7 +14,7 @@ const MoviesDb = () => {
         writer: '',
         star: '',
         image: '',
-
+        status: '',
     }
 
     const [addFormData, setAddFormData] = useState({
@@ -24,7 +24,7 @@ const MoviesDb = () => {
         writer: '',
         star: '',
         image: '',
-
+        status: '',
     })
 
     const [id, SetId] = useState('');
@@ -124,7 +124,7 @@ const MoviesDb = () => {
                             name="star"
                             value={addFormData.star}
                             onChange={handleAddChange}
-                            required />
+                            />
                     </label><br />
                     <label>Image
                         <input
@@ -134,6 +134,14 @@ const MoviesDb = () => {
                             onChange={handleAddChange}
                             required />
                     </label><br />
+                    <label>Status
+                        <input 
+                        type="text"
+                        name="status"
+                        value={addFormData.status}
+                        onChange={handleAddChange}
+                        />
+                    </label>
 
                     <button>Add</button>
                 </form>
