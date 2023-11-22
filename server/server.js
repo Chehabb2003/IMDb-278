@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const bcrypt = require('bcrypt');
-const { db, getDocs, addDoc, usersRef, updateDoc, moviesRef } = require('./config');
+const { db, getDocs, addDoc, usersRef, updateDoc, moviesRef, doc, getDoc } = require('./config');
 const admin = require('firebase-admin');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -150,7 +150,6 @@ app.get('/movies', async (req, res) => {
             ...doc.data()
 
         }));
-        console.log(movies);
         const notComingSoonMovies = movies.filter(movie => movie.status !== 'coming soon');
         res.json(notComingSoonMovies.slice(-5)); // Return last 5 movies
     }
@@ -180,11 +179,11 @@ app.get('/comingsoon', async (req, res) => {
 app.get('/movies/:id', async (req, res) => {
     const movieId = req.params.id;
     try {
-        const docRef = doc(moviesRef, movieId); 
-        const docSnap = await getDocs(docRef);
+        const docRef = doc(moviesRef, movieId);
+        const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-            res.json(docSnap.data()); 
+            res.json(docSnap.data());
         } else {
             res.status(404).json({ error: 'Movie not found' });
         }

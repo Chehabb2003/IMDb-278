@@ -12,6 +12,7 @@ const MovieDetailsPage = () => {
                 const response = await fetch(`http://localhost:5000/movies/${id}`);
                 if (response.ok) {
                     const movieData = await response.json();
+                    console.log(movieData);
                     setMovie(movieData);
                 } else {
                     console.error('Failed to fetch movie details');
@@ -29,7 +30,7 @@ const MovieDetailsPage = () => {
             <h2>Movie Details</h2>
             {movie && (
                 <div className="movie-details-container">
-                    <h3 className="movie-title">{movie.title}</h3>
+                    <h3 className="movie-title">{movie.name}</h3>
                 </div>
             )}
         </div>

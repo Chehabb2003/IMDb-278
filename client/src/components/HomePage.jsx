@@ -18,7 +18,7 @@ const HomePage = () => {
 
     return (
         <div className="home-page" >
-            <div className="container">
+            {/* <div className="container">
                 <Carousel nextLabel="" prevLabel="" className="custom-carousel">
 
                     {movies.map((movie) => (
@@ -33,7 +33,7 @@ const HomePage = () => {
                     ))}
 
                 </Carousel>
-            </div>
+            </div> */}
             <ComingSoon/>
         </div>
     );
