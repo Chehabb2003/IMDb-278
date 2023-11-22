@@ -1,21 +1,29 @@
-/* MovieDetailsPage.css */
+.movie-details-container {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #000;
+}
 
-/* .content {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .movie-details-container {
-    background: #f5f5f5;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-  }
-  
-  .movie-title {
-    margin-bottom: 10px;
-  } */
-  
-  /* Add more styles as needed for other movie details */
-  
+.movie-details-container img {
+  width: 300px;
+  height: auto;
+  border-radius: 8px;
+  margin-right: 20px;
+}
+
+.movie-details-text {
+  flex-grow: 1;
+  color: white;
+}
+
+.movie-details-text h2 {
+  font-size: 40px;
+  margin-bottom: 30px;
+}
+
+.movie-details-text p {
+  margin: 5px 0;
+  font-size: 20px;
+}

@@ -22,7 +22,7 @@ const ComingSoon = () => {
                 {comingsoon.map((movie) => (
                     <Link to={`/movie/${movie.id}`} className="movie-item-link">
                         <div className="movie-item">
-                            <img src={movie.image} alt={movie.title} />
+                            <img src={movie.image} alt={movie.name} />
                         </div>
                     </Link>
                 ))}

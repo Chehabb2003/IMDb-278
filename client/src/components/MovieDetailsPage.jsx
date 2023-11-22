@@ -5,6 +5,7 @@ import '../styles/MovieDetailsPage.css'; // Import the CSS file
 const MovieDetailsPage = () => {
     const { id } = useParams();
     const [movie, setMovie] = useState(null);
+    // const [trailerUrl, setTrailerUrl] = useState('');
 
     useEffect(() => {
         const fetchMovieDetails = async () => {
@@ -21,19 +22,90 @@ const MovieDetailsPage = () => {
                 console.error('Error fetching movie details', error);
             }
         };
+        // const fetchMovieDetails = async () => {
+        //     try {
+        //       const response = await fetch(`http://localhost:5000/movies/${id}`);
+        //       if (response.ok) {
+        //         const movieData = await response.json();
+        //         setMovie(movieData);
+        
+        //         // Fetch YouTube trailer
+        //         const trailerUrl = await fetchYouTubeTrailer(movieData.name);
+        //         setTrailerUrl(trailerUrl);
+        //       } else {
+        //         console.error('Failed to fetch movie details');
+        //       }
+        //     } catch (error) {
+        //       console.error('Error fetching movie details', error);
+        //     }
+        //   };
 
         fetchMovieDetails();
     }, [id]);
 
+    // const fetchYouTubeTrailer = async (movieName) => {
+    //     try {
+    //       const response = await fetch(
+    //         `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
+    //           movieName + ' official trailer'
+    //         )}&type=video&key=YOUR_YOUTUBE_API_KEY`
+    //       );
+      
+    //       if (response.ok) {
+    //         const data = await response.json();
+    //         if (data.items.length > 0) {
+    //           const trailerId = data.items[0].id.videoId;
+    //           const trailerUrl = `https://www.youtube.com/watch?v=${trailerId}`;
+    //           return trailerUrl;
+    //         }
+    //       } else {
+    //         console.error('Failed to fetch trailer');
+    //       }
+    //     } catch (error) {
+    //       console.error('Error fetching trailer:', error);
+    //     }
+    //   };      
+
     return (
         <div className="content">
-            <h2>Movie Details</h2>
             {movie && (
                 <div className="movie-details-container">
-                    <h3 className="movie-title">{movie.name}</h3>
+                <img src={movie.image} alt={movie.name} />
+                <div className="movie-details-text">
+                    <h2>{movie.name}</h2>
+                    <p>Genre: {movie.genre}</p>
+                    <p>Director: {movie.director}</p>
+                    <p>Writer: {movie.writer}</p>
+                    <p>Rating: {movie.star}</p>
+                </div>
                 </div>
             )}
         </div>
+    //     <div className="content">
+    //   {movie && (
+    //     <div className="movie-details-container">
+    //       <img src={movie.image} alt={movie.name} />
+    //       <h2>{movie.name}</h2>
+    //       <p>Genre: {movie.genre}</p>
+    //       <p>Director: {movie.director}</p>
+    //       <p>Writer: {movie.writer}</p>
+    //       <p>Rating: {movie.star}</p>
+
+    //       {trailerUrl && (
+    //         <iframe
+    //           width="560"
+    //           height="315"
+    //           src={`${trailerUrl}?autoplay=1`}
+    //           title="YouTube trailer"
+    //           frameBorder="0"
+    //           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    //           allowFullScreen
+    //         ></iframe>
+    //       )}
+    //     </div>
+    //   )}
+    // </div>
+
     );
 };
 
