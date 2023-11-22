@@ -12,7 +12,7 @@ router.get('/google/callback',
                 name: displayName,
                 email: emails[0].value
             }
-            const accessToken = jwt.sign(userPayload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '40s' })
+            const accessToken = jwt.sign(userPayload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
             res.redirect(`http://localhost:3000/success?token=${accessToken}`)
         }
         else {

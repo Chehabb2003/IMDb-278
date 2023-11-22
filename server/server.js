@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const bcrypt = require('bcrypt');
-const { db, getDocs, addDoc, usersRef, updateDoc, moviesRef } = require('./config');
+const { db, getDocs, addDoc, usersRef, updateDoc, moviesRef, Timestamp } = require('./config');
 // const admin = require('firebase-admin');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
@@ -49,8 +49,11 @@ app.get('/token', authenticateToken, (req, res) => {
 app.post('/signup', async (req, res) => {
     const { name, email, password } = req.body;
     console.log(password);
-
     // const usersRef = collection(db, 'users');
+    const time = Timestamp.now().toDate();
+    const readableDate = time.getFullYear() + '-'
+        + ('0' + (time.getMonth() + 1)).slice(-2) + '-'
+        + ('0' + time.getDate()).slice(-2)
     try {
         const snapshot = await getDocs(usersRef);
         const emailFound = snapshot.docs.some(doc => doc.data().email === email);
@@ -66,8 +69,8 @@ app.post('/signup', async (req, res) => {
                 gender: '',
                 dateOfBirth: '',
                 country: '',
-                profile_pic: ''
-                // createdAt: admin.firestore.FieldValue.serverTimestamp()
+                profile_pic: '',
+                createdAt: readableDate
             }
         }
         else {
@@ -81,8 +84,8 @@ app.post('/signup', async (req, res) => {
                 gender: '',
                 dateOfBirth: '',
                 country: '',
-                profile_pic: ''
-                // createdAt: admin.firestore.FieldValue.serverTimestamp()
+                profile_pic: '',
+                createdAt: readableDate
             }
         }
         addDoc(usersRef, newUser)

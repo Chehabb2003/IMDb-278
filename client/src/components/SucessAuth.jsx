@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
-const SucessGoogle = ({ setUser }) => {
+const SucessAuth = ({ setUser }) => {
     const navigate = useNavigate();
     useEffect(() => {
         const fetchUser = async () => {
@@ -9,7 +9,6 @@ const SucessGoogle = ({ setUser }) => {
             const token = urlParams.get('token');
             if (token) {
                 window.localStorage.setItem('token', token);
-
                 const response = await fetch('http://localhost:5000/token', {
                     headers: {
                         Authorization: `Bearer ${window.localStorage.getItem('token')}`
@@ -38,10 +37,10 @@ const SucessGoogle = ({ setUser }) => {
 
 
     return (
-        <div className="success-google">
+        <div className="success-auht">
 
         </div>
     );
 }
 
-export default SucessGoogle;
+export default SucessAuth;

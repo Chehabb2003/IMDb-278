@@ -145,7 +145,7 @@ const Profile = ({ user, setUser }) => {
                     </label>
                     <label>
                         Date of Birth:
-                        <input type="date" name="sdateOfBirth" value={profiledata.dateOfBirth} onChange={handleChange} />
+                        <input type="date" name="dateOfBirth" value={profiledata.dateOfBirth} onChange={handleChange} />
                     </label>
                     <label>
                         Country:
@@ -171,7 +171,7 @@ const Profile = ({ user, setUser }) => {
                     <p>Gender: {profiledata.gender}</p>
                     <p>Date of Birth: {profiledata.dateOfBirth}</p>
                     <p>Country: {profiledata.country}</p>
-                    <p>Joined: {profiledata.joined}</p>
+                    <p>Joined: {profiledata.dateJoined}</p>
                     {/* {profile.image && <img src={profile.image} alt="Profile" />} */}
                     <button onClick={handleEditToggle}>Edit Profile</button>
                 </div>

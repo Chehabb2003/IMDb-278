@@ -10,7 +10,7 @@ import Footer from './components/Footer';
 import MoviesDb from './components/MoviesDb';
 import { useEffect, useState } from 'react';
 import Profile from './components/Profile';
-import SucessGooogle from './components/SucessGoogle';
+import SucessAuth from './components/SucessAuth';
 
 const App = () => {
 
@@ -52,7 +52,7 @@ const App = () => {
           <Route path='/search' element={<Search />} />
           <Route path='/watchlist' element={<WatchList />} />
           <Route path='/movies-db' element={<MoviesDb />} />
-          <Route path='/success' element={<SucessGooogle setUser={setUser} />} />
+          <Route path='/success' element={<SucessAuth setUser={setUser} />} />
           <Route path='/profile' element={<Profile user={user} setUser={setUser} />} />
         </Routes>
       </div>
