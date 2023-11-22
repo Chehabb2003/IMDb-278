@@ -29,6 +29,7 @@ const App = () => {
       }
       else {
         setUser(null);
+
       }
     };
     // window.addEventListener('storage', handleStorageChange);

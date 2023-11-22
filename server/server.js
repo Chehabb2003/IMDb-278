@@ -66,6 +66,7 @@ app.post('/signup', async (req, res) => {
                 gender: '',
                 dateOfBirth: '',
                 country: '',
+                profile_pic: ''
                 // createdAt: admin.firestore.FieldValue.serverTimestamp()
             }
         }
@@ -80,6 +81,7 @@ app.post('/signup', async (req, res) => {
                 gender: '',
                 dateOfBirth: '',
                 country: '',
+                profile_pic: ''
                 // createdAt: admin.firestore.FieldValue.serverTimestamp()
             }
         }
@@ -121,22 +123,22 @@ app.post('/signin', async (req, res) => {
     }
 });
 
-// app.get('/movies', async (req, res) => {
-//     try {
-//         const snapshot = await getDocs(moviesRef);
-//         const movies = snapshot.docs.map(doc => ({
-//             id: doc.id,
-//             ...doc.data()
+app.get('/movies', async (req, res) => {
+    try {
+        const snapshot = await getDocs(moviesRef);
+        const movies = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
 
-//         }));
-//         // console.log(movies);
-//         res.json(movies.slice(-5)); // Return last 5 movies
-//     }
-//     catch (err) {
-//         res.status(500).send('error')
-//         console.error('Error updating document', error);
-//     }
-// })
+        }));
+        // console.log(movies);
+        res.json(movies.slice(-5)); // Return last 5 movies
+    }
+    catch (err) {
+        res.status(500).send('error')
+        console.error('Error updating document', error);
+    }
+})
 
 
 

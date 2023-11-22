@@ -38,8 +38,11 @@ const Profile = ({ user, setUser }) => {
                     gender: data.gender,
                     dateOfBirth: data.dateOfBirth,
                     country: data.country,
-                    dateJoined: data.createdAt
+                    dateJoined: data.createdAt,
+                    profile_pic: data.profile_pic
                 })
+
+                // console.log(profiledata);
             }
             catch (error) {
                 console.log(error);
@@ -58,9 +61,9 @@ const Profile = ({ user, setUser }) => {
         dateJoined: '',
     })
     const [isEditing, setIsEditing] = useState(false);
-
-
-
+    const [profileFile, setProfileFile] = useState({});
+    const [removePic, setRemovePic] = useState(false);
+    const [inputKey, setInputKey] = useState(Date.now());
     const handleEditToggle = () => {
         setIsEditing(!isEditing);
     }
@@ -73,25 +76,38 @@ const Profile = ({ user, setUser }) => {
         }));
     };
 
-    const handleSave = async () => {
+    const handleImageChange = async (e) => {
+        if (e.target.files[0]) {
+            console.log(e);
+            setProfileFile(e.target.files[0]);
+        }
+    }
+
+    const handleRemovePic = async (e) => {
+        setProfileFile({});
+        setInputKey(Date.now());
+        setRemovePic(e.target.checked);
+        console.log(e.target.checked)
+    }
+    const handleSave = async (e) => {
+        e.preventDefault();
         try {
-            const updatedData = {
-                gender: profiledata.gender,
-                dateOfBirth: profiledata.dateOfBirth,
-                country: profiledata.country,
-                email: profiledata.email,
-                dateJoined: profiledata.dateJoined
-            }
+            const formData = new FormData();
+            formData.append('gender', profiledata.gender);
+            formData.append('dateOfBirth', profiledata.dateOfBirth);
+            formData.append('country', profiledata.country);
+            formData.append('email', profiledata.email);
+            formData.append('dateJoined', profiledata.dateJoined);
+            formData.append('profile_pic', profileFile);
+            formData.append('removePic', removePic);
             const response = await fetch('http://localhost:5000/profile', {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json',
                     'Authorization': `Bearer ${window.localStorage.getItem('token')}`
                 },
-                body: JSON.stringify(updatedData)
+                body: formData
             })
             const data = await response.json();
-            // console.log('data');
             if (data === 'token expired') {
                 alert("Session expired. Please log in again.");
                 window.localStorage.removeItem('token');
@@ -99,6 +115,8 @@ const Profile = ({ user, setUser }) => {
                 navigate('/registration');
             }
             if (data === 'saved') {
+                setProfileFile({});
+                window.location.reload();
                 setIsEditing(!isEditing);
             }
         }
@@ -110,7 +128,7 @@ const Profile = ({ user, setUser }) => {
 
         <div className="user-profile">
             {isEditing ? (
-                <div>
+                <form onSubmit={handleSave}>
                     <label>
                         Username:
                         <input type="text" name="username" value={profiledata.username} onChange={handleChange} readOnly />
@@ -133,13 +151,20 @@ const Profile = ({ user, setUser }) => {
                         Country:
                         <input type="text" name="country" value={profiledata.country} onChange={handleChange} />
                     </label>
-                    {/* Image upload functionality can be added here */}
+                    <label>
+                        Profile Pic:
+                        <input type="file" accept="image/*" key={inputKey} onChange={handleImageChange} />
+                    </label>
+                    <label>
+                        Remove Profile Picture
+                        <input type="checkbox" onChange={handleRemovePic} />
+                    </label>
                     <label>
                         Date Joined:
                         <input type="date" name="dateJoined" onChange={handleChange} value={profiledata.dateJoined} readOnly />
                     </label>
-                    <button onClick={handleSave}>Save</button>
-                </div>
+                    <button>Save</button>
+                </form>
             ) : (
                 <div>
                     <p>Username: {profiledata.username}</p>
