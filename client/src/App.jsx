@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import MoviesDb from './components/MoviesDb';
 import { useEffect, useState } from 'react';
 import Profile from './components/Profile';
+import MovieDetailsPage from './components/MovieDetailsPage';
 
 const App = () => {
 
@@ -51,6 +52,7 @@ const App = () => {
           <Route path='/watchlist' element={<WatchList />} />
           <Route path='/movies-db' element={<MoviesDb />} />
           <Route path='/profile' element={<Profile user={user} setUser={setUser} />} />
+          <Route path="/movie/:id" element={<MovieDetailsPage />} />
         </Routes>
       </div>
       <Footer user={user} />

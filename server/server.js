@@ -151,7 +151,8 @@ app.get('/movies', async (req, res) => {
 
         }));
         console.log(movies);
-        res.json(movies.slice(-5)); // Return last 5 movies
+        const notComingSoonMovies = movies.filter(movie => movie.status !== 'coming soon');
+        res.json(notComingSoonMovies.slice(-5)); // Return last 5 movies
     }
     catch (err) {
         res.status(500).send('error')
@@ -174,6 +175,25 @@ app.get('/comingsoon', async (req, res) => {
         console.error('Error fetching coming soon movies', err);
     }
 });
+
+
+app.get('/movies/:id', async (req, res) => {
+    const movieId = req.params.id;
+    try {
+        const docRef = doc(moviesRef, movieId); 
+        const docSnap = await getDocs(docRef);
+
+        if (docSnap.exists()) {
+            res.json(docSnap.data()); 
+        } else {
+            res.status(404).json({ error: 'Movie not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+        console.error('Error fetching movie details', error);
+    }
+});
+
 
 app.listen(5000, () => console.log('listening on port 5000'))
 
