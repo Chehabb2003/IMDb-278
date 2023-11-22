@@ -25,6 +25,29 @@ router.get('/google',
     passport.authenticate('google', { scope: ["profile", "email"], prompt: 'select_account', session: false }
     ));
 
+router.get('/facebook/callback',
+    passport.authenticate('facebook', { session: false }),
+    (req, res) => {
+        if (req.user) {
+            const { displayName, emails } = req.user;
+            console.log(req.user);
+            const userPayload = {
+                name: displayName,
+                email: emails[0].value
+            }
+            const accessToken = jwt.sign(userPayload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
+            res.redirect(`http://localhost:3000/success?token=${accessToken}`)
+        }
+        else {
+            res.status(403).json({ error: true, message: "Not authorized" })
+        }
+    }
+)
+
+router.get('/facebook',
+    passport.authenticate('facebook', { scope: ["email"], session: false, authType: 'reauthenticate' })
+);
+
 
 module.exports = router;
 

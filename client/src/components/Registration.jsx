@@ -3,9 +3,13 @@ import '../styles/registration.css';
 import { redirect, useNavigate } from 'react-router-dom';
 const Registration = ({ setUser }) => {
     const navigate = useNavigate();
-    const handleSignInGoogle = async () => {
+    const handleSignInGoogle = () => {
         window.location.href = 'http://localhost:5000/auth/google'
     }
+    const handleSignInFaceook = () => {
+        window.location.href = 'http://localhost:5000/auth/facebook'
+    }
+
     useEffect(() => {
         const UrlParams = new URLSearchParams(window.location.search);
         const error = UrlParams.get('error');
@@ -31,7 +35,7 @@ const Registration = ({ setUser }) => {
                             <span>Sign in with Google</span>
                         </div>
                     </button>
-                    <button>
+                    <button onClick={handleSignInFaceook}>
                         <div className="button-div">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Facebook_Logo_2023.png" alt="" />
                             <span>Sign in with Facebook</span>

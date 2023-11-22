@@ -6,7 +6,8 @@ const { db, getDocs, addDoc, usersRef, updateDoc, moviesRef } = require('./confi
 // const admin = require('firebase-admin');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
-require('./authSetUp')
+require('./GoogleAuthSetUp')
+require('./FacebookAuthSetUp');
 require('dotenv').config();
 const authRoute = require('./routes/auth');
 const profileRoute = require('./routes/profile');
@@ -120,22 +121,22 @@ app.post('/signin', async (req, res) => {
     }
 });
 
-app.get('/movies', async (req, res) => {
-    try {
-        const snapshot = await getDocs(moviesRef);
-        const movies = snapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data()
+// app.get('/movies', async (req, res) => {
+//     try {
+//         const snapshot = await getDocs(moviesRef);
+//         const movies = snapshot.docs.map(doc => ({
+//             id: doc.id,
+//             ...doc.data()
 
-        }));
-        // console.log(movies);
-        res.json(movies.slice(-5)); // Return last 5 movies
-    }
-    catch (err) {
-        res.status(500).send('error')
-        console.error('Error updating document', error);
-    }
-})
+//         }));
+//         // console.log(movies);
+//         res.json(movies.slice(-5)); // Return last 5 movies
+//     }
+//     catch (err) {
+//         res.status(500).send('error')
+//         console.error('Error updating document', error);
+//     }
+// })
 
 
 
