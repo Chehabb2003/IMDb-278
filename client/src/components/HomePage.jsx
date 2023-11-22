@@ -45,15 +45,15 @@ const HomePage = () => {
             </div>
 
             <div className="coming-soon-container">
-            <h2>Coming Soon</h2>
-            <div className="movies-container">
-                {comingsoon.map((comingsoon, index) => (
-                <div key={index} className="movie-item">
-                    <img src={comingsoon.image} alt={comingsoon.title} />
-                    <h3>{comingsoon.title}</h3>
+                <h2>Coming Soon</h2>
+                <div className="movies-container">
+                    {comingsoon.map((comingsoon, index) => (
+                        <div key={index} className="movie-item">
+                            <img src={comingsoon.image} alt={comingsoon.title} />
+                            <h3>{comingsoon.title}</h3>
+                        </div>
+                    ))}
                 </div>
-                ))}
-            </div>
             </div>
         </div>
     );
