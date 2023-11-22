@@ -1,8 +1,18 @@
+import { useEffect } from 'react';
 import '../styles/registration.css';
-import { useNavigate } from 'react-router-dom';
-const Registration = () => {
+import { redirect, useNavigate } from 'react-router-dom';
+const Registration = ({ setUser }) => {
     const navigate = useNavigate();
-
+    const handleSignInGoogle = async () => {
+        window.location.href = 'http://localhost:5000/auth/google'
+    }
+    useEffect(() => {
+        const UrlParams = new URLSearchParams(window.location.search);
+        const error = UrlParams.get('error');
+        if (error) {
+            redirect('/registration');
+        }
+    }, [])
     return (
         <div className="registration">
             <div className="registration-container">
@@ -15,9 +25,9 @@ const Registration = () => {
                             <span>Sign in with IMDb</span>
                         </div>
                     </button>
-                    <button>
+                    <button onClick={handleSignInGoogle}>
                         <div className="button-div">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/800px-Google_%22G%22_Logo.svg.png" alt="" />
+                            <img src="https://th.bing.com/th/id/R.442ece698101a331b587a72c6e20f08c?rik=3v8OwUZGpzomlA&pid=ImgRaw&r=0" alt="" />
                             <span>Sign in with Google</span>
                         </div>
                     </button>

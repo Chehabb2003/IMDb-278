@@ -1,4 +1,6 @@
 const Movies = () => {
+
+
     return (
         <div className="movies">
 

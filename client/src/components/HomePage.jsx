@@ -7,12 +7,16 @@ const HomePage = () => {
     const [movies, setMovies] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:5000/movies")
-            .then((response) => response.json())
-            .then((data) => {
+        const fetchTopMovies = async () => {
+            try {
+                const response = await fetch("http://localhost:5000/movies");
+                const data = await response.json();
                 setMovies(data);
-            })
-            .catch((error) => console.error("Error fetching movies", error));
+            } catch (error) {
+                console.error("Error fetching movies", error);
+            }
+        };
+        fetchTopMovies();
     }, []);
 
     return (
@@ -28,7 +32,6 @@ const HomePage = () => {
                                 style={{ height: "440px", width: "100%" }}
                             />
                         </Carousel.Item>
-
                     ))}
 
                 </Carousel>
@@ -36,5 +39,8 @@ const HomePage = () => {
         </div>
     );
 };
+
+
+
 
 export default HomePage;

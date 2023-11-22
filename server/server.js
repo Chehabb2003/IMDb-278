@@ -3,9 +3,13 @@ const app = express();
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const { db, getDocs, addDoc, usersRef, updateDoc, moviesRef } = require('./config');
-const admin = require('firebase-admin');
+// const admin = require('firebase-admin');
 const jwt = require('jsonwebtoken');
+const passport = require('passport');
+require('./authSetUp')
 require('dotenv').config();
+const authRoute = require('./routes/auth');
+const profileRoute = require('./routes/profile');
 
 
 app.use(express.json());
@@ -13,6 +17,9 @@ app.use(express.json());
 // Allow requests from localhost:3000
 app.use(cors({ origin: 'http://localhost:3000' }));
 
+app.use(passport.initialize());
+app.use('/auth', authRoute);
+app.use('/profile', profileRoute);
 
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
@@ -40,18 +47,32 @@ app.get('/token', authenticateToken, (req, res) => {
 
 app.post('/signup', async (req, res) => {
     const { name, email, password } = req.body;
+    console.log(password);
+
     // const usersRef = collection(db, 'users');
     try {
         const snapshot = await getDocs(usersRef);
         const emailFound = snapshot.docs.some(doc => doc.data().email === email);
+        let newUser;
         if (emailFound) {
             res.json('email already exists')
+            return;
+        }
+        else if (password === undefined) {
+            newUser = {
+                name,
+                email,
+                gender: '',
+                dateOfBirth: '',
+                country: '',
+                // createdAt: admin.firestore.FieldValue.serverTimestamp()
+            }
         }
         else {
             const saltRounds = 10;
             const salt = await bcrypt.genSalt(saltRounds)
             const hashedpassword = await bcrypt.hash(password, salt)
-            const newUser = {
+            newUser = {
                 name,
                 email,
                 password: hashedpassword,
@@ -60,9 +81,9 @@ app.post('/signup', async (req, res) => {
                 country: '',
                 // createdAt: admin.firestore.FieldValue.serverTimestamp()
             }
-            addDoc(usersRef, newUser)
-            res.json('user created')
         }
+        addDoc(usersRef, newUser)
+        res.json('user created')
     }
     catch (error) {
         console.log(error);
@@ -90,10 +111,6 @@ app.post('/signin', async (req, res) => {
                 }
                 const accessToken = jwt.sign(userPayload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: rememberMe ? '7d' : '1h' })
                 res.json({ userPayload, accessToken })
-                // res.send({
-                //     name: user.data().name,
-                //     email: user.data().email
-                // })
             } else {
                 res.json('password incorrect');
             }
@@ -103,45 +120,6 @@ app.post('/signin', async (req, res) => {
     }
 });
 
-app.post('/profile', async (req, res) => {
-    const { email } = req.body;
-    try {
-        // const usersRef = collection(db, 'users');
-        const snapshot = await getDocs(usersRef);
-        const user = snapshot.docs.find(doc => doc.data().email === email);
-        if (user !== undefined) {
-            res.json(user.data());
-            return;
-        }
-    }
-    catch (error) {
-        console.log(error)
-        res.status(500).send('Error');
-    }
-});
-
-app.put('/profile', authenticateToken, async (req, res) => {
-    const { gender, dateOfBirth, country, email, dateJoined } = req.body;
-    console.log(gender);
-    try {
-        const updatedUser = {
-            gender,
-            dateOfBirth,
-            country,
-            // dateJoined,
-        }
-        const snapshot = await getDocs(usersRef);
-        const user = snapshot.docs.find(doc => doc.data().email === email);
-        await updateDoc(user.ref, updatedUser);
-        console.log('User profile updated successfully');
-        res.json('saved');
-    }
-    catch (error) {
-        res.status(500).send('error');
-        console.error('Error updating document', error);
-    }
-})
-
 app.get('/movies', async (req, res) => {
     try {
         const snapshot = await getDocs(moviesRef);
@@ -150,7 +128,7 @@ app.get('/movies', async (req, res) => {
             ...doc.data()
 
         }));
-        console.log(movies);
+        // console.log(movies);
         res.json(movies.slice(-5)); // Return last 5 movies
     }
     catch (err) {
@@ -158,6 +136,8 @@ app.get('/movies', async (req, res) => {
         console.error('Error updating document', error);
     }
 })
+
+
 
 app.listen(5000, () => console.log('listening on port 5000'))
 

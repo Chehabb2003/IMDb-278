@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import MoviesDb from './components/MoviesDb';
 import { useEffect, useState } from 'react';
 import Profile from './components/Profile';
+import SucessGooogle from './components/SucessGoogle';
 
 const App = () => {
 
@@ -44,12 +45,13 @@ const App = () => {
       <div className="content">
         <Routes>
           <Route path='/' element={<HomePage />} />
-          <Route path='/registration' element={<Registration />} />
+          <Route path='/registration' element={<Registration setUser={setUser} />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/signin' element={<SignIn user={user} setUser={setUser} />} />
           <Route path='/search' element={<Search />} />
           <Route path='/watchlist' element={<WatchList />} />
           <Route path='/movies-db' element={<MoviesDb />} />
+          <Route path='/success' element={<SucessGooogle setUser={setUser} />} />
           <Route path='/profile' element={<Profile user={user} setUser={setUser} />} />
         </Routes>
       </div>

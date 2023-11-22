@@ -15,6 +15,7 @@ const Profile = ({ user, setUser }) => {
             if (data === 'token expired') {
                 alert("Session expired. Please log in again.");
                 window.localStorage.removeItem('token');
+                setUser(null);
                 navigate('/registration');
             }
             const user = data;
@@ -90,7 +91,7 @@ const Profile = ({ user, setUser }) => {
                 body: JSON.stringify(updatedData)
             })
             const data = await response.json();
-            console.log('data');
+            // console.log('data');
             if (data === 'token expired') {
                 alert("Session expired. Please log in again.");
                 window.localStorage.removeItem('token');
