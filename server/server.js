@@ -161,13 +161,13 @@ app.get('/movies', async (req, res) => {
 
 app.get('/comingsoon', async (req, res) => {
     try {
-        const snapshot = await getDocs(moviesRef.where('status', '==', 'coming soon'));
+        const snapshot = await getDocs(moviesRef);
         const movies = snapshot.docs.map(doc => ({
             id: doc.id,
             ...doc.data()
         }));
-        console.log(movies);
-        res.json(movies);
+        const commingsoon = movies.filter((movie) => movie.status === 'coming soon');
+        res.json(commingsoon);
     }
     catch (err) {
         res.status(500).send('error');
