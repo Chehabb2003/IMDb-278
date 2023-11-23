@@ -1,0 +1,119 @@
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import '../styles/MovieDetailsPage.css';
+
+const MovieDetailsPage = () => {
+    const { id } = useParams();
+    const [movie, setMovie] = useState(null);
+    const [trailerUrl, setTrailerUrl] = useState('');
+
+    useEffect(() => {
+        // const fetchMovieDetails = async () => {
+        //     try {
+        //         const response = await fetch(`http://localhost:5000/movies/${id}`);
+        //         if (response.ok) {
+        //             const movieData = await response.json();
+        //             console.log(movieData);
+        //             setMovie(movieData);
+        //         } else {
+        //             console.error('Failed to fetch movie details');
+        //         }
+        //     } catch (error) {
+        //         console.error('Error fetching movie details', error);
+        //     }
+        // };
+        const fetchMovieDetails = async () => {
+            try {
+                const response = await fetch(`http://localhost:5000/movies/${id}`);
+                if (response.ok) {
+                    const movieData = await response.json();
+                    setMovie(movieData);
+
+                    // Fetch YouTube trailer
+                    const trailerUrl = await fetchYouTubeTrailer(movieData.name);
+                    setTrailerUrl(trailerUrl);
+                } else {
+                    console.error('Failed to fetch movie details');
+                }
+            } catch (error) {
+                console.error('Error fetching movie details', error);
+            }
+        };
+
+        fetchMovieDetails();
+    }, [id]);
+
+    const fetchYouTubeTrailer = async (movieName) => {
+        try {
+            const response = await fetch(
+                `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
+                    movieName + ' official trailer'
+                )}&type=video&key=AIzaSyCTeNSTZktpP9-SmLhzubAn5Alx_qSAWEg`
+            );
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.items.length > 0) {
+                    const trailerId = data.items[0].id.videoId;
+                    const trailerUrl = `https://www.youtube.com/watch?v=${trailerId}`;
+                    return trailerUrl;
+                }
+            } else {
+                console.error('Failed to fetch trailer');
+            }
+        } catch (error) {
+            console.error('Error fetching trailer:', error);
+        }
+    };
+
+    return (
+        // <div className="content">
+        //     {movie && (
+        //         <div className="movie-details-container">
+        //         <img src={movie.image} alt={movie.name} />
+        //         <div className="movie-details-text">
+        //             <h2>{movie.name}</h2>
+        //             <p>Genre: {movie.genre}</p>
+        //             <p>Director: {movie.director}</p>
+        //             <p>Writer: {movie.writer}</p>
+        //             <p>Rating: {movie.star}</p>
+        //         </div>
+        //         </div>
+        //     )}
+        // </div>
+        <div className="content-moviedetail">
+            {movie && (
+                <div className="movie-details-container">
+                    <div className="image">
+                        <img src={movie.image} alt={movie.name} />
+                    </div>
+
+                    <div className='text'>
+                        <h2>{movie.name}</h2>
+                        <p>Genre: {movie.genre}</p>
+                        <p>Director: {movie.director}</p>
+                        <p>Writer: {movie.writer}</p>
+                        <p>Rating: {movie.star}</p>
+                    </div>
+
+                    <div className="trailer">
+                        {trailerUrl && (
+                            <iframe
+                                width="560"
+                                height="315"
+                                src={`${trailerUrl}?autoplay=1`}
+                                title="YouTube trailer"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                            ></iframe>
+                        )}
+                    </div>
+
+                </div>
+            )}
+        </div>
+
+    );
+};
+
+export default MovieDetailsPage;

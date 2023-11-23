@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Carousel from 'react-bootstrap/Carousel';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/HomePage.css';
+import ComingSoon from './ComingSoon';
 
 const HomePage = () => {
     const [movies, setMovies] = useState([]);
@@ -22,7 +23,7 @@ const HomePage = () => {
     return (
         <div className="home-page" >
             <div className="container">
-                <Carousel nextLabel="" prevLabel="" className="custom-carousel">
+                {/* <Carousel nextLabel="" prevLabel="" className="custom-carousel">
 
                     {movies.map((movie) => (
                         <Carousel.Item key={movie.id}>
@@ -33,14 +34,11 @@ const HomePage = () => {
                             />
                         </Carousel.Item>
                     ))}
-
-                </Carousel>
+                </Carousel> */}
             </div>
+            <ComingSoon />
         </div>
     );
 };
-
-
-
 
 export default HomePage;
