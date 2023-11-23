@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const bcrypt = require('bcrypt');
-const { db, getDocs, addDoc, usersRef, updateDoc, moviesRef, Timestamp } = require('./config');
+const { db, getDocs, addDoc, usersRef, updateDoc, moviesRef, Timestamp, doc, getDoc } = require('./config');
 // const admin = require('firebase-admin');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
@@ -193,9 +193,6 @@ app.get('/watchlist', authenticateToken, async (req, res) => {
         console.log(error);
     }
 });
-
-
-
 
 app.listen(5000, () => console.log('listening on port 5000'))
 

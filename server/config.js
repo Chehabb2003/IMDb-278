@@ -1,5 +1,5 @@
 const { initializeApp } = require('@firebase/app');
-const { getFirestore, collection, getDocs, addDoc, updateDoc, Timestamp } = require('@firebase/firestore');
+const { getFirestore, collection, getDocs, addDoc, updateDoc, Timestamp, doc, getDoc } = require('@firebase/firestore');
 const { getStorage } = require('@firebase/storage');
 // const admin = require('firebase-admin');
 
@@ -20,5 +20,5 @@ const moviesRef = collection(db, 'movies');
 const usersRef = collection(db, 'users');
 // const watchListRef = collection(db, 'watchlist');
 
-module.exports = { db, getDocs, addDoc, usersRef, updateDoc, moviesRef, storage, Timestamp };
+module.exports = { db, getDocs, addDoc, usersRef, updateDoc, moviesRef, storage, Timestamp, doc, getDoc };
 
