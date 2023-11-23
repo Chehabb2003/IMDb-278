@@ -21,6 +21,14 @@ const Signin = ({ user, setUser }) => {
         }
         ))
     }
+    const handleCheckOnChange = (e) => {
+        const { name, checked } = e.target;
+        setSignInInfo(prevState => ({
+            ...prevState,
+            [name]: checked
+        }
+        ))
+    }
 
     const IsValidEmail = () => {
         const regexEmail = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
@@ -121,7 +129,7 @@ const Signin = ({ user, setUser }) => {
                     <div className='signin-div'>
                         <button>Sign In</button>
                     </div>
-                    <input type="checkbox" name="rememberMe" checked={signInInfo.rememberMe} onChange={handleOnChange} />&nbsp;
+                    <input type="checkbox" name="rememberMe" checked={signInInfo.rememberMe} onChange={handleCheckOnChange} />&nbsp;
                     <span htmlFor="rememberMe">Remember me</span>
                     <div className='signin-div'>
                         <p>Don't have an account? <Link to='/signup'>Sign Up</Link></p>

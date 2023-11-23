@@ -48,7 +48,6 @@ app.get('/token', authenticateToken, (req, res) => {
 
 app.post('/signup', async (req, res) => {
     const { name, email, password } = req.body;
-    console.log(password);
     // const usersRef = collection(db, 'users');
     const time = Timestamp.now().toDate();
     const readableDate = time.getFullYear() + '-'
@@ -70,6 +69,7 @@ app.post('/signup', async (req, res) => {
                 dateOfBirth: '',
                 country: '',
                 profile_pic: '',
+                watchlist: [],
                 createdAt: readableDate
             }
         }
@@ -85,6 +85,7 @@ app.post('/signup', async (req, res) => {
                 dateOfBirth: '',
                 country: '',
                 profile_pic: '',
+                watchlist: [],
                 createdAt: readableDate
             }
         }
@@ -126,22 +127,39 @@ app.post('/signin', async (req, res) => {
     }
 });
 
-app.get('/movies', async (req, res) => {
-    try {
-        const snapshot = await getDocs(moviesRef);
-        const movies = snapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data()
+// app.get('/movies', async (req, res) => {
+//     try {
+//         const snapshot = await getDocs(moviesRef);
+//         const movies = snapshot.docs.map(doc => ({
+//             id: doc.id,
+//             ...doc.data()
 
-        }));
-        // console.log(movies);
-        res.json(movies.slice(-5)); // Return last 5 movies
+//         }));
+//         // console.log(movies);
+//         res.json(movies.slice(-5)); // Return last 5 movies
+//     }
+//     catch (err) {
+//         res.status(500).send('error')
+//         console.error('Error updating document', error);
+//     }
+// })
+
+
+app.get('/watchlist', authenticateToken, async (req, res) => {
+    const { email } = req.user;
+    try {
+        const userSnapshot = await getDocs(usersRef);
+        const user = userSnapshot.docs.find(doc => doc.data().email === email);
+        const watchlist = user.data().watchlist;
+        const movieSnapshot = await getDocs(moviesRef);
+        const movies = movieSnapshot.docs.filter((movie) => watchlist.includes(movie.id));
+        res.json(movies);
     }
-    catch (err) {
-        res.status(500).send('error')
-        console.error('Error updating document', error);
+    catch (error) {
+        console.log(error);
     }
 })
+
 
 
 

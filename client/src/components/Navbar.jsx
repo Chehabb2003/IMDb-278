@@ -30,9 +30,6 @@ const Navbar = ({ user, setUser }) => {
             case 'view-profile':
                 navigate('/profile');
                 break;
-            case 'watchlist':
-                navigate('/watchlist');
-                break;
             case 'sign-out':
                 window.localStorage.clear();
                 setUser(null);
@@ -54,7 +51,6 @@ const Navbar = ({ user, setUser }) => {
             })
             const data = await response.json();
             const profile_pic = data.profile_pic;
-            console.log(data);
             if (profile_pic !== '') {
                 setProfilePic({
                     found: true,
@@ -118,7 +114,6 @@ const Navbar = ({ user, setUser }) => {
                         <select onChange={handleSelect} defaultValue={name}>
                             <option value={name} hidden>{name}</option>
                             <option value="view-profile">Profile</option>
-                            <option value="watchlist">Watchlist</option>
                             <option value="ratings">Ratings</option>
                             <option value="sign-out">Sign Out</option>
                         </select>

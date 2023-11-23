@@ -81,7 +81,6 @@ router.put('/', authenticateToken, upload.single('profile_pic'), async (req, res
         if (removePic === 'false' && url === '') {
             const newurl = await user.data().profile_pic;
             updatedUser.profile_pic = newurl
-            console.log(updatedUser);
             await updateDoc(user.ref, updatedUser);
         }
         else {
