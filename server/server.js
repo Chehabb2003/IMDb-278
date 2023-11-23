@@ -127,22 +127,56 @@ app.post('/signin', async (req, res) => {
     }
 });
 
-// app.get('/movies', async (req, res) => {
-//     try {
-//         const snapshot = await getDocs(moviesRef);
-//         const movies = snapshot.docs.map(doc => ({
-//             id: doc.id,
-//             ...doc.data()
+app.get('/movies', async (req, res) => {
+    try {
+        const snapshot = await getDocs(moviesRef);
+        const movies = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
 
-//         }));
-//         // console.log(movies);
-//         res.json(movies.slice(-5)); // Return last 5 movies
-//     }
-//     catch (err) {
-//         res.status(500).send('error')
-//         console.error('Error updating document', error);
-//     }
-// })
+        }));
+        const notComingSoonMovies = movies.filter(movie => movie.status !== 'coming soon');
+        res.json(notComingSoonMovies.slice(-5)); // Return last 5 movies
+    }
+    catch (err) {
+        res.status(500).send('error')
+        console.error('Error updating document', error);
+    }
+})
+
+app.get('/comingsoon', async (req, res) => {
+    try {
+        const snapshot = await getDocs(moviesRef);
+        const movies = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
+        const commingsoon = movies.filter((movie) => movie.status === 'coming soon');
+        res.json(commingsoon);
+    }
+    catch (err) {
+        res.status(500).send('error');
+        console.error('Error fetching coming soon movies', err);
+    }
+});
+
+
+app.get('/movies/:id', async (req, res) => {
+    const movieId = req.params.id;
+    try {
+        const docRef = doc(moviesRef, movieId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            res.json(docSnap.data());
+        } else {
+            res.status(404).json({ error: 'Movie not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+        console.error('Error fetching movie details', error);
+    }
+});
 
 
 app.get('/watchlist', authenticateToken, async (req, res) => {
@@ -158,7 +192,7 @@ app.get('/watchlist', authenticateToken, async (req, res) => {
     catch (error) {
         console.log(error);
     }
-})
+});
 
 
 
