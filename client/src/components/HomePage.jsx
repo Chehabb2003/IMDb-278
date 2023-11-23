@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import Carousel from 'react-bootstrap/Carousel';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/HomePage.css';
+import RecentMovies from './RecentMovies';
+import FeaturedMovies from './FeaturedMovies';
 import ComingSoon from './ComingSoon';
+
 
 const HomePage = () => {
     const [movies, setMovies] = useState([]);
@@ -22,20 +25,8 @@ const HomePage = () => {
 
     return (
         <div className="home-page" >
-            <div className="container">
-                {/* <Carousel nextLabel="" prevLabel="" className="custom-carousel">
-
-                    {movies.map((movie) => (
-                        <Carousel.Item key={movie.id}>
-                            <img
-                                src={movie.image}
-                                alt={movie.name}
-                                style={{ height: "440px", width: "100%" }}
-                            />
-                        </Carousel.Item>
-                    ))}
-                </Carousel> */}
-            </div>
+            <RecentMovies />
+            <FeaturedMovies />
             <ComingSoon />
         </div>
     );

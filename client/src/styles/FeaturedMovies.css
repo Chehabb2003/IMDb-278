@@ -1,0 +1,41 @@
+.second-container {
+    margin-top: 2%;
+    margin-left: 3%;
+}
+
+.second-container h2 {
+    color: #f3ce13;
+    font-weight: bold;
+    font-size: 180%;
+    margin-bottom: 2%;
+}
+
+.second-container .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: black;
+}
+
+.second-container .card-container .card {
+    margin-bottom: 20px;
+    margin-right: 2%;
+    width: 20%;
+    background-color: #f3ce13;
+}
+
+.second-container .card-container .card .card-text {
+    text-align: center;
+    color: black;
+    font-weight: bold;
+}
+
+.second-container .link-no-underline {
+    text-decoration: none;
+}
+
+.second-container .container h2 {
+    color: #f3ce13;
+    font-weight: bold;
+    font-size: 180%;
+    margin-bottom: 2%;
+}

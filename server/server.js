@@ -70,7 +70,8 @@ app.post('/signup', async (req, res) => {
                 country: '',
                 profile_pic: '',
                 watchlist: [],
-                createdAt: readableDate
+                createdAt: readableDate,
+                reviews: []
             }
         }
         else {
@@ -86,7 +87,8 @@ app.post('/signup', async (req, res) => {
                 country: '',
                 profile_pic: '',
                 watchlist: [],
-                createdAt: readableDate
+                createdAt: readableDate,
+                reviews: []
             }
         }
         addDoc(usersRef, newUser)
@@ -177,6 +179,36 @@ app.get('/movies/:id', async (req, res) => {
         console.error('Error fetching movie details', error);
     }
 });
+
+app.get('/featured-movies', async (req, res) => {
+    try {
+        const random = [];
+        const snapshot = await getDocs(moviesRef);
+        const movies = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        function getRandomMoviesArray(array, count) {
+            const randomMovies = [];
+            const moviesCopy = [...array];
+            for (let i = 0; i < count; i++) {
+                const randomIndex = getRandomInt(0, moviesCopy.length - 1);
+                const randomMovie = moviesCopy.splice(randomIndex, 1)[0];
+                randomMovies.push(randomMovie);
+            }
+            return randomMovies;
+        }
+        const threeRandomMovies = getRandomMoviesArray(movies, 3);
+        res.json(threeRandomMovies);
+    }
+    catch (error) {
+        res.status(500).send('error');
+        console.error('Error getting the featured movies', error);
+    }
+})
 
 
 app.get('/watchlist', authenticateToken, async (req, res) => {

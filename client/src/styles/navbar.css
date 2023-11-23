@@ -40,7 +40,7 @@
 }
 
 .navbar button,
-select {
+.navbar select {
     padding: 8px 15px;
     border: none;
     border-radius: 4px;

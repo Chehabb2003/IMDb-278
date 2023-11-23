@@ -14,7 +14,7 @@
     color: white;
 }
 
-.movies-container {
+.coming-soon-container .movies-container {
     display: flex;
     flex-direction: row;
     /* Updated to create a row layout */
@@ -24,19 +24,19 @@
     /* Adds space between movie items */
 }
 
-.movie-item {
+.coming-soon-container .movie-item {
     border-radius: 6px;
     overflow: hidden;
     box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.1);
 }
 
-.movie-item img {
+.coming-soon-container .movie-item img {
     width: 100px;
     height: 150px;
     border-radius: 6px;
 }
 
-.movie-item-link {
+.coming-soon-container .movie-item-link {
     text-decoration: none;
     /* Remove underline from the link */
     color: inherit;
