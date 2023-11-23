@@ -27,7 +27,7 @@ const RecentMovies = () => {
     return (
         <div className='recent-movies' style={{ 'margin-left': '3%' }}>
             <h2>Recent Movies</h2>
-            <div className="slider relative">
+            <div className="slider">
                 <BsChevronLeft className="left-arrow" onClick={prevMovie} />
                 {movies.map((movie, index) => (
                     <div key={movie.id} className={`slide ${index === currentIndex ? 'active' : ''}`}>

@@ -1,4 +1,5 @@
-import { useEffect, useState /*,useRef*/ } from 'react';
+
+import { useEffect, useState /*useRef*/ } from 'react';
 import { db } from '../database/firebase';
 import { addDoc, collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { Link } from 'react-router-dom';
@@ -14,7 +15,8 @@ const MoviesDb = () => {
         writer: '',
         star: '',
         image: '',
-
+        status: '',
+        year: '',
     }
 
     const [addFormData, setAddFormData] = useState({
@@ -24,7 +26,8 @@ const MoviesDb = () => {
         writer: '',
         star: '',
         image: '',
-
+        status: '',
+        year: '',
     })
 
     const [id, SetId] = useState('');
@@ -116,7 +119,7 @@ const MoviesDb = () => {
                             name="writer"
                             value={addFormData.writer}
                             onChange={handleAddChange}
-                            required />
+                        />
                     </label><br />
                     <label>Star
                         <input
@@ -124,7 +127,7 @@ const MoviesDb = () => {
                             name="star"
                             value={addFormData.star}
                             onChange={handleAddChange}
-                            required />
+                        />
                     </label><br />
                     <label>Image
                         <input
@@ -134,6 +137,22 @@ const MoviesDb = () => {
                             onChange={handleAddChange}
                             required />
                     </label><br />
+                    <label>Status
+                        <input
+                            type="text"
+                            name="status"
+                            value={addFormData.status}
+                            onChange={handleAddChange}
+                        />
+                    </label>
+                    <label>Year
+                        <input
+                            type="text"
+                            name="year"
+                            value={addFormData.year}
+                            onChange={handleAddChange}
+                        />
+                    </label>
 
                     <button>Add</button>
                 </form>
@@ -145,7 +164,7 @@ const MoviesDb = () => {
                             type="text"
                             value={id}
                             onChange={(e) => SetId(e.target.value)}
-                            required />
+                        />
                     </label>
                     <button>Delete</button>
                 </form>

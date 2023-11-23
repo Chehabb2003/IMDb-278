@@ -22,7 +22,12 @@ const Navbar = ({ user, setUser }) => {
             navigate(`/search?q=${searchValue}`);
         }
     }
-
+    // const resetdb = async () => {
+    //     const response = await fetch('http://localhost:5000/overwrite')
+    //     if (response.ok) {
+    //         console.log('sucess');
+    //     }
+    // }
     const handleSelect = (e) => {
         const value = e.target.value;
         e.target.value = name;
@@ -90,7 +95,7 @@ const Navbar = ({ user, setUser }) => {
             {user && <nav className='navbar'>
                 <div className="navbar-div1">
 
-                    <Link to="/"><button className="imdb-button">IMDb</button></Link>
+                    <Link to="/"><button /*onClick={resetdb}*/ className="imdb-button">IMDb</button></Link>
                 </div>
                 <div className="navbar-div2">
                     <input type="text" placeholder="Search IMDb" value={searchValue}

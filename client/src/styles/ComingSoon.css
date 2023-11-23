@@ -1,47 +1,44 @@
 .coming-soon-container {
-    background-color: #000;
-    padding: 20px;
-    border-radius: 8px;
-    width: 50%;
-    margin-top: 20px;
-    color: #fff;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 2%;
+    margin-left: 3%;
 }
 
 .coming-soon-container h2 {
-    margin-bottom: 15px;
-    font-size: 24px;
-    color: white;
+    color: #f3ce13;
+    font-weight: bold;
+    font-size: 180%;
+    margin-bottom: 1%;
+    font-size: 35px;
 }
 
-.coming-soon-container .movies-container {
+.coming-soon-container .card-container {
     display: flex;
-    flex-direction: row;
-    /* Updated to create a row layout */
     flex-wrap: wrap;
-    /* Allows items to wrap if they exceed container width */
-    gap: 10px;
-    /* Adds space between movie items */
+    background-color: black;
+    justify-content: space-between;
+    display: flex;
 }
 
-.coming-soon-container .movie-item {
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.1);
+.coming-soon-container .card-container .card {
+    margin-bottom: 3%;
+    margin-right: 2%;
+    width: 18%;
+    background-color: #f3ce13;
 }
 
-.coming-soon-container .movie-item img {
-    width: 100px;
-    height: 150px;
-    border-radius: 6px;
+.coming-soon-container .card-container .card .card-text {
+    text-align: center;
+    color: black;
+    font-weight: bold;
 }
 
-.coming-soon-container .movie-item-link {
+.coming-soon-container .link-no-underline {
     text-decoration: none;
-    /* Remove underline from the link */
-    color: inherit;
-    /* Inherit color from parent */
-    display: block;
-    /* Make the link a block-level element */
-    cursor: pointer;
+}
+
+.coming-soon-container .container h2 {
+    color: #f3ce13;
+    font-weight: bold;
+    font-size: 180%;
+    margin-bottom: 2%;
 }

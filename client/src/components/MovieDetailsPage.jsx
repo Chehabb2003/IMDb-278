@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import '../styles/MovieDetailsPage.css';
+import '../styles/MovieDetailsPage.css'; // Import the CSS file
 
 const MovieDetailsPage = () => {
     const { id } = useParams();
@@ -8,20 +8,6 @@ const MovieDetailsPage = () => {
     const [trailerUrl, setTrailerUrl] = useState('');
 
     useEffect(() => {
-        // const fetchMovieDetails = async () => {
-        //     try {
-        //         const response = await fetch(`http://localhost:5000/movies/${id}`);
-        //         if (response.ok) {
-        //             const movieData = await response.json();
-        //             console.log(movieData);
-        //             setMovie(movieData);
-        //         } else {
-        //             console.error('Failed to fetch movie details');
-        //         }
-        //     } catch (error) {
-        //         console.error('Error fetching movie details', error);
-        //     }
-        // };
         const fetchMovieDetails = async () => {
             try {
                 const response = await fetch(`http://localhost:5000/movies/${id}`);
@@ -95,7 +81,6 @@ const MovieDetailsPage = () => {
                         <p>Writer: {movie.writer}</p>
                         <p>Rating: {movie.star}</p>
                     </div>
-
                     <div className="trailer">
                         {trailerUrl && (
                             <iframe

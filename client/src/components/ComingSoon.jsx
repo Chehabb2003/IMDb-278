@@ -18,16 +18,20 @@ const ComingSoon = () => {
     return (
         <div className="coming-soon-container">
             <h2>Coming Soon</h2>
-            <div className="movies-container">
+            <div className="card-container">
                 {comingsoon.map((movie) => (
-                    <Link to={`/movie/${movie.id}`} className="movie-item-link">
-                        <div className="movie-item">
-                            <img src={movie.image} alt={movie.name} />
-                        </div>
-                    </Link>
+                    <div key={movie.id} className="card movie-item">
+                        <Link to={`/movie/${movie.id}`} className="link-no-underline">
+                            <img src={movie.image} alt={movie.name} style={{ height: "300px", width: "100%" }} />
+                            <div className="card-body">
+                                <p className="card-text" style={{ textDecoration: 'none' }}>{movie.name}</p>
+                            </div>
+                        </Link>
+                    </div>
                 ))}
             </div>
-        </div>
+        </div >
+
     );
 };
 

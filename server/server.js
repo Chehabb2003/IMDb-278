@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const bcrypt = require('bcrypt');
-const { db, getDocs, addDoc, usersRef, updateDoc, moviesRef, Timestamp, doc, getDoc } = require('./config');
+const { db, getDocs, addDoc, usersRef, updateDoc, moviesRef, Timestamp, doc, getDoc, reviewRef } = require('./config');
 // const admin = require('firebase-admin');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
@@ -225,6 +225,53 @@ app.get('/watchlist', authenticateToken, async (req, res) => {
         console.log(error);
     }
 });
+
+
+app.post('/reviews', authenticateToken, async (req, res) => {
+    const { email } = req.user;
+    const { rating, review_title, review_body } = req.body;
+    const movie_id = req.params.id;
+    try {
+        const userSnapshot = await getDocs(usersRef);
+        const user = userSnapshot.docs.find((doc) => doc.data().email === email);
+        const moviesdocRef = doc(moviesRef, movie_id);
+        const movie = await getDoc(moviesdocRef);
+        const newReview = {
+            title: review_title,
+            rating: rating,
+            reviewBody: review_body,
+            movie_name: movie.data().name,
+            added_by: user.data().name
+        }
+        let prevReviews = user.data().reviews;
+        let updatedUser = {
+            reviews: prevReviews.append(newReview)
+        }
+        await updateDoc(movie.ref, updatedData);
+
+        let prevTopPicks = user.data().topPicks;
+        if (rating >= 8) {
+            updatedUser = {
+                reviews: prevReviews.append(newReview),
+                topPicks: prevTopPicks.append(prevTopPicks)
+            }
+        }
+        await updateDoc(user.ref, updatedUser);
+        res.json('successfully posted review');
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+
+// app.get('/overwrite', async (req, res) => {
+//     const movieSnapshot = await getDocs(moviesRef);
+//     let newfield = { year: '' };
+//     for (const doc of movieSnapshot.docs) {
+//         await updateDoc(doc.ref, newfield);
+//     }
+//     res.json('success');
+// });
 
 app.listen(5000, () => console.log('listening on port 5000'))
 
