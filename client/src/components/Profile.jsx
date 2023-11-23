@@ -10,7 +10,6 @@ const Profile = ({ user, setUser }) => {
                     Authorization: `Bearer ${window.localStorage.getItem('token')}`
                 }
             });
-
             const data = await response.json();
             if (data === 'token expired') {
                 alert("Session expired. Please log in again.");
@@ -59,6 +58,7 @@ const Profile = ({ user, setUser }) => {
         dateOfBirth: '',
         country: '',
         dateJoined: '',
+        profile_pic: '',
     })
     const [isEditing, setIsEditing] = useState(false);
     const [profileFile, setProfileFile] = useState({});
@@ -167,12 +167,12 @@ const Profile = ({ user, setUser }) => {
                 </form>
             ) : (
                 <div>
+                    <div>Profile:{<img src={profiledata.profile_pic} alt="Profile" />}</div>
                     <p>Username: {profiledata.username}</p>
                     <p>Gender: {profiledata.gender}</p>
                     <p>Date of Birth: {profiledata.dateOfBirth}</p>
                     <p>Country: {profiledata.country}</p>
                     <p>Joined: {profiledata.dateJoined}</p>
-                    {/* {profile.image && <img src={profile.image} alt="Profile" />} */}
                     <button onClick={handleEditToggle}>Edit Profile</button>
                 </div>
             )}
