@@ -81,7 +81,7 @@ const MovieDetailsPage = () => {
         //         </div>
         //     )}
         // </div>
-        <div className="content">
+        <div className="content-moviedetail">
             {movie && (
                 <div className="movie-details-container">
                     <div className="image">
