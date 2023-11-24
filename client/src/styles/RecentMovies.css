@@ -2,6 +2,7 @@
     position: relative;
     overflow: hidden;
     width: 90%;
+    margin-left: 2.5%;
 }
 
 .slider button {
@@ -20,7 +21,6 @@
     display: none;
     transition: opacity 0.5s ease-in-out;
     position: relative;
-    margin-left: 35%;
 }
 
 .recent-movies .slide.active {
@@ -37,7 +37,7 @@
 .recent-movies .left-arrow {
     position: absolute;
     top: 50%;
-    left: 29%;
+    left: 26%;
     font-size: 55px;
     cursor: pointer;
     z-index: 1;
@@ -50,7 +50,7 @@
 .recent-movies .right-arrow {
     position: absolute;
     top: 50%;
-    right: 22%;
+    right: 26%;
     font-size: 55px;
     cursor: pointer;
     z-index: 1;
@@ -75,7 +75,7 @@
     border-radius: 10px;
     font-size: 20px;
     display: block;
-    margin-left: 18%;
+    margin: 0 auto;
 }
 
 
