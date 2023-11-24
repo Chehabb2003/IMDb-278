@@ -41,7 +41,7 @@ const MovieDetailsPage = () => {
                 const data = await response.json();
                 if (data.items.length > 0) {
                     const trailerId = data.items[0].id.videoId;
-                    const trailerUrl = `https://www.youtube.com/embed/${trailerId}`;
+                    const trailerUrl = `https://www.youtube.com/embed/${trailerId}?autoplay=1&controls=0`;
                     return trailerUrl;
                 }
             } else {
