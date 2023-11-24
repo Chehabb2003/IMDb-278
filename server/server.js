@@ -195,7 +195,7 @@ app.get('/featured', async (req, res) => {   // getting featured movies
 })
 
 
-app.get('/movies/commingsoon/:id', async (req, res) => { //for moviesdetails1
+app.get('/movie/:id', authenticateToken, async (req, res) => { //for moviesdetails1
     const movieId = req.params.id;
     try {
         const docRef = doc(moviesRef, movieId);
@@ -212,13 +212,13 @@ app.get('/movies/commingsoon/:id', async (req, res) => { //for moviesdetails1
     }
 }); 2
 
-app.get('movies/featuredmovies/:id', async (req, res) => { //to get feautred movie detail
+// app.get('movies/featuredmovies/:id', async (req, res) => { //to get feautred movie detail
 
-})
+// })
 
-app.get('movies/recentmovies/:id', async (req, res) => {  //to get recent movie detail
+// app.get('movies/recentmovies/:id', async (req, res) => {  //to get recent movie detail
 
-})
+// })
 
 
 
