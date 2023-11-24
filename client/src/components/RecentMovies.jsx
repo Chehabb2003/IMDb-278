@@ -8,7 +8,7 @@ const RecentMovies = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
-        fetch('http://localhost:5000/movies')
+        fetch('http://localhost:5000/recentmovies')
             .then((response) => response.json())
             .then((data) => {
                 setMovies(data);

@@ -41,7 +41,7 @@ const MovieDetailsPage = () => {
                 const data = await response.json();
                 if (data.items.length > 0) {
                     const trailerId = data.items[0].id.videoId;
-                    const trailerUrl = `https://www.youtube.com/embed/${trailerId}`;
+                    const trailerUrl = `https://www.youtube.com/embed/${trailerId}?autoplay=1&controls=0`;
                     return trailerUrl;
                 }
             } else {
@@ -86,17 +86,18 @@ const MovieDetailsPage = () => {
                             <iframe
                                 width="560"
                                 height="315"
-                                src={`${trailerUrl}?autoplay=1`}
-                                title="YouTube trailer"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
+                                src={`${trailerUrl}? autoplay = 1`}
+                        title="YouTube trailer"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
                             ></iframe>
                         )}
-                    </div>
+                </div>
 
                 </div>
-            )}
-        </div>
+    )
+}
+        </div >
 
     );
 };
