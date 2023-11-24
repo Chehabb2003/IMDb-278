@@ -10,11 +10,10 @@ const MovieDetailsPage = () => {
     useEffect(() => {
         const fetchMovieDetails = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/movies/commingsoon/${id}`);
+                const response = await fetch(`http://localhost:5000/movie/${id}`);
                 if (response.ok) {
                     const movieData = await response.json();
                     setMovie(movieData);
-
                     // Fetch YouTube trailer
                     const trailerUrl = await fetchYouTubeTrailer(movieData.name);
                     setTrailerUrl(trailerUrl);

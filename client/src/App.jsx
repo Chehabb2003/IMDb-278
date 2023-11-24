@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import Profile from './components/Profile';
 import SucessAuth from './components/SucessAuth';
 import MovieDetailsPage from './components/MovieDetailsPage';
+import MovieDetailsPage2 from './components/MovieDetailsPage2';
 
 
 const App = () => {
@@ -55,7 +56,8 @@ const App = () => {
           <Route path='/movies-db' element={<MoviesDb />} />
           <Route path='/success' element={<SucessAuth setUser={setUser} />} />
           <Route path='/profile' element={<Profile user={user} setUser={setUser} />} />
-          <Route path="/movie/:id" element={<MovieDetailsPage />} />
+          <Route path="/movie/commingsoon/:id" element={<MovieDetailsPage />} />
+          <Route path="/movie/:id" element={<MovieDetailsPage2 />} />
         </Routes>
       </div>
       <Footer user={user} />

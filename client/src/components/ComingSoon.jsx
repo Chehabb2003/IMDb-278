@@ -21,7 +21,7 @@ const ComingSoon = () => {
             <div className="card-container">
                 {comingsoon.map((movie) => (
                     <div key={movie.id} className="card movie-item">
-                        <Link to={`/movie/${movie.id}`} className="link-no-underline">
+                        <Link to={`/movie/commingsoon/${movie.id}`} className="link-no-underline">
                             <img src={movie.image} alt={movie.name} style={{ height: "300px", width: "100%" }} />
                             <div className="card-body">
                                 <p className="card-text" style={{ textDecoration: 'none' }}>{movie.name}</p>

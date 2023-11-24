@@ -195,7 +195,7 @@ app.get('/featured', async (req, res) => {   // getting featured movies
 })
 
 
-app.get('/movie/:id', authenticateToken, async (req, res) => { //for moviesdetails1
+app.get('/movie/:id', async (req, res) => { //for moviesdetails1 
     const movieId = req.params.id;
     try {
         const docRef = doc(moviesRef, movieId);
@@ -210,7 +210,7 @@ app.get('/movie/:id', authenticateToken, async (req, res) => { //for moviesdetai
         res.status(500).json({ error: 'Internal Server Error' });
         console.error('Error fetching movie details', error);
     }
-}); 2
+});
 
 // app.get('movies/featuredmovies/:id', async (req, res) => { //to get feautred movie detail
 
@@ -271,6 +271,12 @@ app.post('/reviews', authenticateToken, async (req, res) => {
                 topPicks: prevTopPicks.append(prevTopPicks)
             }
         }
+        else {
+            const nbrOfReviews = user.data().review_count;
+            updatedUser = {
+                review_count: nbrOfReviews + 1
+            }
+        }
         await updateDoc(user.ref, updatedUser);
         res.json('successfully posted review');
     }
@@ -281,7 +287,7 @@ app.post('/reviews', authenticateToken, async (req, res) => {
 
 // app.get('/overwrite', async (req, res) => {
 //     const movieSnapshot = await getDocs(moviesRef);
-//     let newfield = { year: '' };
+//     let newfield = { review_count: '' };
 //     for (const doc of movieSnapshot.docs) {
 //         await updateDoc(doc.ref, newfield);
 //     }

@@ -1,0 +1,50 @@
+.movies-details-page2 {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.movies-details-page2 h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.movies-details-page2 .card-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.movies-details-page2 .card {
+    width: 300px;
+    /* Adjust as needed */
+    border: 1px solid #ddd;
+    /* Light grey border */
+    border-radius: 8px;
+    /* Rounded corners */
+    overflow: hidden;
+    /* Keeps the child elements inside the border-radius */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Subtle shadow for depth */
+}
+
+.movies-details-page2 .card-img-top {
+    width: 100%;
+    /* Full width of the card */
+    height: 380px;
+    /* Fixed height, but you can make it responsive */
+    object-fit: cover;
+    /* Ensures the image covers the area nicely */
+}
+
+.movies-details-page2 .card-body {
+    padding: 15px;
+    text-align: center;
+}
+
+.movies-details-page2 .card-text {
+    margin: 0;
+    text-decoration: none;
+    /* Overrides default styles */
+}
