@@ -1,0 +1,100 @@
+.user-profile .view-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-profile .view-profile div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-profile .view-profile .profile-pic-label {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.user-profile .view-profile img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 3px solid #ddd;
+}
+
+
+.user-profile {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.user-profile .view-profile,
+.user-profile .edit-profile {
+    text-align: center;
+}
+
+.user-profile .view-profile img,
+.user-profile .edit-profile img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 3px solid #ddd;
+}
+
+.user-profile p,
+.user-profile label {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.user-profile button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.user-profile button:hover {
+    background-color: #0056b3;
+}
+
+.user-profile input[type="text"],
+.user-profile input[type="date"],
+.user-profile select,
+.user-profile input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.user-profile input[type="checkbox"] {
+    margin-left: 10px;
+}
+
+.user-profile .edit-profile label {
+    display: block;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.user-profile .view-profile div {
+    margin-bottom: 20px;
+}

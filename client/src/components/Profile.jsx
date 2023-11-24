@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-// import fetchToken from "../utils/tokenapi";
+import '../styles/profile.css';// import fetchToken from "../utils/tokenapi";
 const Profile = ({ user, setUser }) => {
     let email, username;
     useEffect(() => {
@@ -128,7 +128,7 @@ const Profile = ({ user, setUser }) => {
 
         <div className="user-profile">
             {isEditing ? (
-                <form onSubmit={handleSave}>
+                <form className='edit-profile' onSubmit={handleSave}>
                     <label>
                         Username:
                         <input type="text" name="username" value={profiledata.username} onChange={handleChange} readOnly />
@@ -166,8 +166,11 @@ const Profile = ({ user, setUser }) => {
                     <button>Save</button>
                 </form>
             ) : (
-                <div>
-                    <div>Profile:{<img src={profiledata.profile_pic} alt="Profile" />}</div>
+                <div className="view-profile">
+                    <div className="profile-pic-container">
+                        <span className="profile-pic-label">Profile:</span>
+                        <img src={profiledata.profile_pic} alt="Profile" />
+                    </div>
                     <p>Username: {profiledata.username}</p>
                     <p>Gender: {profiledata.gender}</p>
                     <p>Date of Birth: {profiledata.dateOfBirth}</p>
@@ -177,7 +180,6 @@ const Profile = ({ user, setUser }) => {
                 </div>
             )}
         </div>
-
     );
 }
 

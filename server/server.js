@@ -118,7 +118,7 @@ app.post('/signin', async (req, res) => {
                     name: user.data().name,
                     email: user.data().email
                 }
-                const accessToken = jwt.sign(userPayload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: rememberMe ? '7d' : '1h' })
+                const accessToken = jwt.sign(userPayload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: rememberMe ? '7d' : '1d' })
                 res.json({ userPayload, accessToken })
             } else {
                 res.json('password incorrect');
@@ -227,7 +227,7 @@ app.get('/watchlist', authenticateToken, async (req, res) => {
 });
 
 
-app.post('/reviews', authenticateToken, async (req, res) => {
+app.post('/reviews', async (req, res) => {
     const { email } = req.user;
     const { rating, review_title, review_body } = req.body;
     const movie_id = req.params.id;
