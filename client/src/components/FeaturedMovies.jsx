@@ -7,7 +7,7 @@ const FeaturedMovies = () => {
     const [featuredmovies, setfeatured] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:5000/featured-movies")
+        fetch("http://localhost:5000/featured")
             .then((response) => response.json())
             .then((data) => {
                 setfeatured(data);

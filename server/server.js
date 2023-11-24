@@ -129,7 +129,7 @@ app.post('/signin', async (req, res) => {
     }
 });
 
-app.get('/movies', async (req, res) => {
+app.get('/recentmovies', async (req, res) => {
     try {
         const snapshot = await getDocs(moviesRef);
         const movies = snapshot.docs.map(doc => ({
@@ -146,7 +146,7 @@ app.get('/movies', async (req, res) => {
     }
 })
 
-app.get('/comingsoon', async (req, res) => {
+app.get('/comingsoon', async (req, res) => {  // getting comming soon movies
     try {
         const snapshot = await getDocs(moviesRef);
         const movies = snapshot.docs.map(doc => ({
@@ -162,25 +162,7 @@ app.get('/comingsoon', async (req, res) => {
     }
 });
 
-
-app.get('/movies/:id', async (req, res) => {
-    const movieId = req.params.id;
-    try {
-        const docRef = doc(moviesRef, movieId);
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-            res.json(docSnap.data());
-        } else {
-            res.status(404).json({ error: 'Movie not found' });
-        }
-    } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
-        console.error('Error fetching movie details', error);
-    }
-});
-
-app.get('/featured-movies', async (req, res) => {
+app.get('/featured', async (req, res) => {   // getting featured movies
     try {
         const random = [];
         const snapshot = await getDocs(moviesRef);
@@ -209,6 +191,35 @@ app.get('/featured-movies', async (req, res) => {
         console.error('Error getting the featured movies', error);
     }
 })
+
+
+app.get('/movies/commingsoon/:id', async (req, res) => { //for moviesdetails1
+    const movieId = req.params.id;
+    try {
+        const docRef = doc(moviesRef, movieId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            res.json(docSnap.data());
+        } else {
+            res.status(404).json({ error: 'Movie not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+        console.error('Error fetching movie details', error);
+    }
+});2
+
+app.get('movies/featuredmovies/:id', async (req, res) => { //to get feautred movie detail
+
+})
+
+app.get('movies/recentmovies/:id', async (req, res) => {  //to get recent movie detail
+
+})
+
+
+
 
 
 app.get('/watchlist', authenticateToken, async (req, res) => {
