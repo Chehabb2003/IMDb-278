@@ -20,7 +20,7 @@ recentMovies.css .slider {
     display: none;
     transition: opacity 0.5s ease-in-out;
     position: relative;
-    margin-left: 35%;
+    margin-left: 31%;
 }
 
 .recent-movies .slide.active {
@@ -36,8 +36,8 @@ recentMovies.css .slider {
 
 .recent-movies .left-arrow {
     position: absolute;
-    top: 50%;
-    left: 29%;
+    top: 80%;
+    left: 28%;
     font-size: 55px;
     cursor: pointer;
     z-index: 1;
@@ -49,8 +49,8 @@ recentMovies.css .slider {
 
 .recent-movies .right-arrow {
     position: absolute;
-    top: 50%;
-    right: 22%;
+    top: 80%;
+    right: 29.8%;
     font-size: 55px;
     cursor: pointer;
     z-index: 1;
