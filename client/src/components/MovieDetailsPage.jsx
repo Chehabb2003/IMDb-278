@@ -10,7 +10,7 @@ const MovieDetailsPage = () => {
     useEffect(() => {
         const fetchMovieDetails = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/movies/${id}`);
+                const response = await fetch(`http://localhost:5000/movies/commingsoon/${id}`);
                 if (response.ok) {
                     const movieData = await response.json();
                     setMovie(movieData);
@@ -87,16 +87,16 @@ const MovieDetailsPage = () => {
                                 width="560"
                                 height="315"
                                 src={`${trailerUrl}? autoplay = 1`}
-                        title="YouTube trailer"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
+                                title="YouTube trailer"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
                             ></iframe>
                         )}
-                </div>
+                    </div>
 
                 </div>
-    )
-}
+            )
+            }
         </div >
 
     );

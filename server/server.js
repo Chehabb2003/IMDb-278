@@ -11,6 +11,7 @@ require('./FacebookAuthSetUp');
 require('dotenv').config();
 const authRoute = require('./routes/auth');
 const profileRoute = require('./routes/profile');
+const watchListRoute = require('./routes/watchlist');
 
 
 app.use(express.json());
@@ -21,6 +22,7 @@ app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(passport.initialize());
 app.use('/auth', authRoute);
 app.use('/profile', profileRoute);
+app.use('/watchlist', watchListRoute);
 
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
@@ -208,7 +210,7 @@ app.get('/movies/commingsoon/:id', async (req, res) => { //for moviesdetails1
         res.status(500).json({ error: 'Internal Server Error' });
         console.error('Error fetching movie details', error);
     }
-});2
+}); 2
 
 app.get('movies/featuredmovies/:id', async (req, res) => { //to get feautred movie detail
 
@@ -222,23 +224,25 @@ app.get('movies/recentmovies/:id', async (req, res) => {  //to get recent movie 
 
 
 
-app.get('/watchlist', authenticateToken, async (req, res) => {
-    const { email } = req.user;
-    try {
-        const userSnapshot = await getDocs(usersRef);
-        const user = userSnapshot.docs.find(doc => doc.data().email === email);
-        const watchlist = user.data().watchlist;
-        const movieSnapshot = await getDocs(moviesRef);
-        const movies = movieSnapshot.docs.filter((movie) => watchlist.includes(movie.id));
-        res.json(movies);
-    }
-    catch (error) {
-        console.log(error);
-    }
-});
+// app.get('/watchlist', authenticateToken, async (req, res) => {
+//     const { email } = req.user;
+//     try {
+//         const userSnapshot = await getDocs(usersRef);
+//         const user = userSnapshot.docs.find(doc => doc.data().email === email);
+//         const watchlist = user.data().watchlist;
+//         const movieSnapshot = await getDocs(moviesRef);
+//         const movies = movieSnapshot.docs.filter((movie) => watchlist.includes(movie.id));
+//         res.json(movies);
+//     }
+//     catch (error) {
+//         console.log(error);
+//     }
+// });
+
+// app.get('/')
 
 
-app.post('/reviews', async (req, res) => {
+app.post('/reviews', authenticateToken, async (req, res) => {
     const { email } = req.user;
     const { rating, review_title, review_body } = req.body;
     const movie_id = req.params.id;
