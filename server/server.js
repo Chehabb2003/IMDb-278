@@ -335,5 +335,24 @@ app.get('/actors', async (req, res) => {
 
 // });
 
+
+app.get('/actors/:id', async (req, res) => {
+    const actorId = req.params.id;
+    try {
+      const actorRef = doc(actorsRef, actorId);
+      const actorSnapshot = await getDoc(actorRef);
+  
+      if (actorSnapshot.exists()) {
+        const actorData = actorSnapshot.data();
+        res.json(actorData);
+      } else {
+        res.status(404).json({ message: 'Actor not found' });
+      }
+    } catch (error) {
+      console.error('Error fetching actor:', error);
+      res.status(500).json({ message: 'An error occurred' });
+    }
+  });
+
 app.listen(5000, () => console.log('listening on port 5000'))
 
