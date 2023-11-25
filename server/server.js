@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const bcrypt = require('bcrypt');
-const { db, getDocs, addDoc, usersRef, updateDoc, moviesRef, Timestamp, doc, getDoc, reviewRef } = require('./config');
+const { db, getDocs, addDoc, usersRef, updateDoc, moviesRef, Timestamp, doc, getDoc, reviewRef, actorsRef } = require('./config');
 // const admin = require('firebase-admin');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
@@ -73,7 +73,8 @@ app.post('/signup', async (req, res) => {
                 profile_pic: '',
                 watchlist: [],
                 createdAt: readableDate,
-                reviews: []
+                reviews: [],
+                topPicks: []
             }
         }
         else {
@@ -242,42 +243,54 @@ app.get('/movie/:id', async (req, res) => { //for moviesdetails1
 // app.get('/')
 
 
-app.post('/reviews', authenticateToken, async (req, res) => {
+app.post('/reviews/:id', authenticateToken, async (req, res) => {
     const { email } = req.user;
-    const { rating, review_title, review_body } = req.body;
+    const { rating, review_title, review_body } = req.body.reviewData;
     const movie_id = req.params.id;
+    // console.log('rating', rating);
+    // console.log(review_title);
+    // console.log(review_body);
     try {
         const userSnapshot = await getDocs(usersRef);
         const user = userSnapshot.docs.find((doc) => doc.data().email === email);
+        // console.log(user.data());
         const moviesdocRef = doc(moviesRef, movie_id);
         const movie = await getDoc(moviesdocRef);
+        // console.log(movie.data());
+
         const newReview = {
             title: review_title,
             rating: rating,
             reviewBody: review_body,
             movie_name: movie.data().name,
-            added_by: user.data().name
+            added_by: user.data().name,
+            created_at: new Date().toISOString() // Add a timestamp in ISO 8601 format
         }
-        let prevReviews = user.data().reviews;
-        let updatedUser = {
-            reviews: prevReviews.append(newReview)
+        let prevMovieReviews = movie.data().reviews;
+        console.log(prevMovieReviews);
+        prevMovieReviews.push(newReview);
+        let updatedData = {
+            reviews: prevMovieReviews,
+            review_count: movie.data().review_count + 1
         }
         await updateDoc(movie.ref, updatedData);
 
+        let prevUserReviews = user.data().reviews || [];
+        prevUserReviews.push(newReview);
         let prevTopPicks = user.data().topPicks;
+        prevTopPicks.push(prevTopPicks)
         if (rating >= 8) {
-            updatedUser = {
-                reviews: prevReviews.append(newReview),
-                topPicks: prevTopPicks.append(prevTopPicks)
+            updatedData = {
+                reviews: prevUserReviews,
+                topPicks: prevTopPicks
             }
         }
         else {
-            const nbrOfReviews = user.data().review_count;
-            updatedUser = {
-                review_count: nbrOfReviews + 1
+            updatedData = {
+                reviews: prevUserReviews
             }
         }
-        await updateDoc(user.ref, updatedUser);
+        await updateDoc(user.ref, updatedData);
         res.json('successfully posted review');
     }
     catch (error) {
@@ -285,13 +298,41 @@ app.post('/reviews', authenticateToken, async (req, res) => {
     }
 });
 
+app.get('/reviews/:id', async (req, res) => {
+    const movieId = req.params.id;
+    try {
+        const movieRef = doc(moviesRef, movieId);
+        const movie = await getDoc(movieRef);
+        res.json({ reviews: movie.data().reviews, message: 'success' })
+    }
+    catch (error) {
+        res.status(500).json({ message: "An error occurred" });
+    }
+});
+
+app.get('/actors', async (req, res) => {
+    const snapshot = await getDocs(actorsRef);
+    const actors = snapshot.docs.map(doc => doc.data());
+    console.log(actors);
+    res.json(actors);
+});
+
 // app.get('/overwrite', async (req, res) => {
 //     const movieSnapshot = await getDocs(moviesRef);
-//     let newfield = { review_count: '' };
+//     let newfield = { reviews: [] };
 //     for (const doc of movieSnapshot.docs) {
 //         await updateDoc(doc.ref, newfield);
 //     }
 //     res.json('success');
+// });
+
+// app.get('/createcollection', async (req, res) => {
+
+//     const temp = {
+//         'value': 'test'
+//     }
+//     addDoc(actorsRef, temp);
+
 // });
 
 app.listen(5000, () => console.log('listening on port 5000'))

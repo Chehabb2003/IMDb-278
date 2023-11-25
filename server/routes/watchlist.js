@@ -34,29 +34,30 @@ router.get('/', authenticateToken, async (req, res) => {
     }
 });
 
-router.get('/additem', authenticateToken, async (req, res) => {
-    const { movie_id } = req.body;
+router.post('/additem', authenticateToken, async (req, res) => {
+    const { id } = req.body;
     const { email } = req.user;
+    console.log(email);
+    console.log(id);
     try {
-        const docRef = doc(moviesRef, movie_id);
+        const docRef = doc(moviesRef, id);
         const movie = await getDoc(docRef);
         if (!movie.exists()) {
             return res.status(404).json({ message: "Movie not found" });
         }
         const userSnap = await getDocs(usersRef);
-        const user = userSnap.docs.filter((doc) => doc.data().email === email)
-        if (!userDoc) {
+        const user = userSnap.docs.find((doc) => doc.data().email === email)
+        if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
-
+        console.log(user.data())
         user.data().watchlist.push(movie.data());
-        res.json(user.data().watchlist);
+        res.json({ data: user.data().watchlist, message: 'success' });
     }
     catch (error) {
         res.status(500).json({ message: "An error occurred" });
     }
 })
-
 
 module.exports = router;
 

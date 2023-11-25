@@ -19,7 +19,7 @@ const storage = getStorage(app);
 const moviesRef = collection(db, 'movies');
 const usersRef = collection(db, 'users');
 const reviewRef = collection(db, 'reviews');
-// const watchListRef = collection(db, 'watchlist');
+const actorsRef = collection(db, 'actors');
 
-module.exports = { db, getDocs, addDoc, usersRef, updateDoc, moviesRef, storage, Timestamp, doc, getDoc, reviewRef };
+module.exports = { db, getDocs, addDoc, usersRef, updateDoc, moviesRef, storage, Timestamp, doc, getDoc, reviewRef, actorsRef };
 

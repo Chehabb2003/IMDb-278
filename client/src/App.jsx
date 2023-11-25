@@ -13,7 +13,7 @@ import Profile from './components/Profile';
 import SucessAuth from './components/SucessAuth';
 import MovieDetailsPage from './components/MovieDetailsPage';
 import MovieDetailsPage2 from './components/MovieDetailsPage2';
-
+import MovieReview from './components/MovieReview';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -57,7 +57,9 @@ const App = () => {
           <Route path='/success' element={<SucessAuth setUser={setUser} />} />
           <Route path='/profile' element={<Profile user={user} setUser={setUser} />} />
           <Route path="/movie/commingsoon/:id" element={<MovieDetailsPage />} />
-          <Route path="/movie/:id" element={<MovieDetailsPage2 />} />
+          <Route path="/movie/:id" element={<MovieDetailsPage2 user={user} setUser={setUser} />} />
+          <Route path="/movie/reviews/:id" element={<MovieReview user={user} setUser={setUser} />} />
+
         </Routes>
       </div>
       <Footer user={user} />

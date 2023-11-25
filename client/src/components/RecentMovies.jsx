@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import '../styles/RecentMovies.css';
 import 'tailwindcss/tailwind.css';
+import { Link } from 'react-router-dom';
+
 
 const RecentMovies = () => {
     const [movies, setMovies] = useState([]);
@@ -31,13 +33,15 @@ const RecentMovies = () => {
                 <BsChevronLeft className="left-arrow" onClick={prevMovie} />
                 {movies.map((movie, index) => (
                     <div key={movie.id} className={`slide ${index === currentIndex ? 'active' : ''}`}>
-                        <img
-                            src={movie.image}
-                            alt={movie.name}
-                        />
-                        <button key={movie.id}>
-                            Watch Trailer
-                        </button>
+                        <Link to={`/movie/${movie.id}`} className="link-no-underline">
+                            <img
+                                src={movie.image}
+                                alt={movie.name}
+                            />
+                            <button key={movie.id}>
+                                Watch Trailer
+                            </button>
+                        </Link>
                     </div>
                 ))}
                 <BsChevronRight className="right-arrow" onClick={nextMovie} />
