@@ -267,7 +267,7 @@ app.post('/reviews/:id', authenticateToken, async (req, res) => {
             created_at: new Date().toISOString() // Add a timestamp in ISO 8601 format
         }
         let prevMovieReviews = movie.data().reviews;
-        console.log(prevMovieReviews);
+        // console.log(prevMovieReviews);
         prevMovieReviews.push(newReview);
         let updatedData = {
             reviews: prevMovieReviews,
@@ -312,8 +312,11 @@ app.get('/reviews/:id', async (req, res) => {
 
 app.get('/actors', async (req, res) => {
     const snapshot = await getDocs(actorsRef);
-    const actors = snapshot.docs.map(doc => doc.data());
-    console.log(actors);
+    const actors = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+    }));
+    // console.log(actors);
     res.json(actors);
 });
 
@@ -336,23 +339,24 @@ app.get('/actors', async (req, res) => {
 // });
 
 
-app.get('/actors/:id', async (req, res) => {
+app.get('/actorsdetails/:id', async (req, res) => {
     const actorId = req.params.id;
+    console.log(actorId);
     try {
-      const actorRef = doc(actorsRef, actorId);
-      const actorSnapshot = await getDoc(actorRef);
-  
-      if (actorSnapshot.exists()) {
-        const actorData = actorSnapshot.data();
-        res.json(actorData);
-      } else {
-        res.status(404).json({ message: 'Actor not found' });
-      }
-    } catch (error) {
-      console.error('Error fetching actor:', error);
-      res.status(500).json({ message: 'An error occurred' });
-    }
-  });
+        const actorRef = doc(actorsRef, actorId);
+        const actorSnapshot = await getDoc(actorRef);
 
-app.listen(5000, () => console.log('listening on port 5000'))
+        if (actorSnapshot.exists()) {
+            const actorData = actorSnapshot.data();
+            res.json(actorData);
+        } else {
+            res.status(404).json({ message: 'Actor not found' });
+        }
+    } catch (error) {
+        console.error('Error fetching actor:', error);
+        res.status(500).json({ message: 'An error occurred' });
+    }
+});
+
+app.listen(5000, () => console.log('listening on port 5000'));
 

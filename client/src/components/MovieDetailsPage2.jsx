@@ -136,71 +136,71 @@ const MovieDetailsPage2 = ({ user, setUser }) => {
         <div className="movies-details-page2">
             <div className="card-container">
                 <div key={movie.id} className="card">
-                {/* Card Content */}
-                <img
-                    className="card-img-top"
-                    src={movie.image}
-                    alt={movie.name}
-                    style={{ height: "380px", width: "100%" }}
-                />
-                <div className="card-body">
-                    <button onClick={handleWatchList}>Add to Watchlist</button>
-                </div>
+                    {/* Card Content */}
+                    <img
+                        className="card-img-top"
+                        src={movie.image}
+                        alt={movie.name}
+                        style={{ height: "380px", width: "100%" }}
+                    />
+                    <div className="card-body">
+                        <button onClick={handleWatchList}>Add to Watchlist</button>
+                    </div>
                 </div>
             </div>
 
             <div className="movie-details2">
                 <div className="movie-overview">
-                <h2>{movie.name}</h2>
+                    <h2>{movie.name}</h2>
                 </div>
 
                 <div className="movie-information">
-                <p>Genre: {movie.genre}</p>
-                <p>Director: {movie.director}</p>
-                <p>Writer: {movie.writer}</p>
-                <p>Rating: {movie.star}</p>
-                <Link to={`/actors/${movie.movie_star.id}`} className="link-no-underline">
-                    <p>Star: {movie.movie_star}</p>
-                </Link>
-                <p>More Actors:</p>
+                    <p>Genre: {movie.genre}</p>
+                    <p>Director: {movie.director}</p>
+                    <p>Writer: {movie.writer}</p>
+                    <p>Rating: {movie.star}</p>
+                    <Link to={`/actors/${movie.movie_star}`} className="link-no-underline">
+                        <p>Star: {movie.movie_star}</p>
+                    </Link>
+                    <p>More Actors:</p>
                 </div>
 
                 <div className="top-cast">
-                {actorslist.length > 1 &&
-                    movie.actors.map((actor) => {
-                    const foundActor = actorslist.find(
-                        (actorRec) => actorRec.name === actor
-                    );
-                    if (foundActor) {
-                        return (
-                        <div className="actor-item" key={actor}>
-                            <Link to={`/actors/${foundActor.id}`} className="link-no-underline">
-                                <img src={foundActor.image} alt={actor} />
-                                <p>{actor}</p>
-                            </Link>
-                        </div>
-                        );
-                    } else {
-                        return null;
-                    }
-                    })}
+                    {actorslist.length > 1 &&
+                        movie.actors.map((actor) => {
+                            const foundActor = actorslist.find(
+                                (actorRec) => actorRec.name === actor
+                            );
+                            if (foundActor) {
+                                return (
+                                    <div className="actor-item" key={actor}>
+                                        <Link to={`/actors/${foundActor.id}`} className="link-no-underline">
+                                            <img src={foundActor.image} alt={actor} />
+                                            <p>{actor}</p>
+                                        </Link>
+                                    </div>
+                                );
+                            } else {
+                                return null;
+                            }
+                        })}
                 </div>
 
                 <div className="movie-review">
-                <button onClick={handleReviewPage}>View Movie Reviews</button>
+                    <button onClick={handleReviewPage}>View Movie Reviews</button>
                 </div>
             </div>
 
             <div className="trailer">
                 {trailerUrl && (
-                <iframe
-                    width="560"
-                    height="315"
-                    src={`${trailerUrl}?autoplay=1`}
-                    title="YouTube trailer"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                ></iframe>
+                    <iframe
+                        width="560"
+                        height="315"
+                        src={`${trailerUrl}?autoplay=1`}
+                        title="YouTube trailer"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                    ></iframe>
                 )}
             </div>
         </div>

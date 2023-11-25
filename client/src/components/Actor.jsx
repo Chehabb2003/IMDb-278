@@ -3,26 +3,26 @@ import { useParams } from 'react-router-dom';
 
 
 const Actor = () => {
-  const { actorId } = useParams();
+  const { id } = useParams();
   const [actor, setActor] = useState(null);
 
   useEffect(() => {
-    const fetchActorDetails = async () => {
-      try {
-        const response = await fetch(`/actors/${actorId}`);
-        if (response.ok) {
-          const actorData = await response.json();
-          setActor(actorData);
-        } else {
-          console.error('Failed to fetch actor details');
-        }
-      } catch (error) {
-        console.error('Error fetching actor details', error);
-      }
-    };
     fetchActorDetails();
-  }, [actorId]);
+  }, [id]);
 
+  const fetchActorDetails = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/actorsdetails/${id}`);
+      if (response.ok) {
+        const actorData = await response.json();
+        setActor(actorData);
+      } else {
+        console.error('Failed to fetch actor details');
+      }
+    } catch (error) {
+      console.error('Error fetching actor details', error);
+    }
+  };
   return (
     <div className="actor-page">
       {actor && (
@@ -37,7 +37,7 @@ const Actor = () => {
           <div className="known-for-movies">
             <h3>Known For</h3>
             <div className="movies-list">
-              {actor.knownFor.map((movie) => (
+              {actor.movies.map((movie) => (
                 <div key={movie.id} className="movie-item">
                   <img src={movie.image} alt={movie.name} />
                   <p>{movie.name}</p>
