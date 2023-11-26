@@ -278,12 +278,15 @@ app.post('/reviews/:id', authenticateToken, async (req, res) => {
 
         let prevUserReviews = user.data().reviews || [];
         prevUserReviews.push(newReview);
-        let prevTopPicks = user.data().topPicks;
-        prevTopPicks.push(prevTopPicks)
         if (rating >= 8) {
-            updatedData = {
-                reviews: prevUserReviews,
-                topPicks: prevTopPicks
+            let prevTopPicks = user.data().topPicks;
+            const found = prevTopPicks.some((review) => review.movie_name === newReview.movie_name)
+            if (found) {
+                prevTopPicks.push(newReview);
+                updatedData = {
+                    reviews: prevUserReviews,
+                    topPicks: prevTopPicks
+                }
             }
         }
         else {

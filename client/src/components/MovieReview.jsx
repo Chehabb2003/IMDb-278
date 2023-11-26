@@ -46,7 +46,7 @@ const MovieReview = () => {
 
     useEffect(() => {
         fetchReviews();
-        handleFilterChange();
+        // handleFilterChange();
     }, [reload])
 
 
@@ -66,6 +66,7 @@ const MovieReview = () => {
             navigate('/registration');
             return;
         }
+        console.log('here');
         setReload(reload + 1);
     }
 

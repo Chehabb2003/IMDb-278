@@ -188,7 +188,7 @@ const Profile = ({ user, setUser }) => {
             ) : (
                 <div className="Second-user-profile">
                     <div className="card profile-pic" style={{ width: "20%", height: "70%", backgroundColor: "#f3ce13", marginRight: "5%" }}>
-                        <img className="card-img-top " src={profiledata.profile_pic} />
+                        <img className="card-img-top " src={profiledata.profile_pic} alt="Profile" />
                         <div className="card-body text-center">
                             <p className="card-text">{profiledata.username}</p>
                         </div>
@@ -207,20 +207,22 @@ const Profile = ({ user, setUser }) => {
                             <hr />
                             <button className="edit-profile" onClick={handleEditToggle}>Edit Profile</button>
                             <div className='All-reviews'>
+                                <h4>Top picks</h4>
                                 {profiledata.reviews.length !== 0 && profiledata.reviews.map((review) => (
                                     <div className='review-item'>
+                                        <h3>Movie: {review.movie_name}</h3>
                                         <h4>{review.title}</h4>
                                         <p>Created at: {formatDate(review.created_at)}</p>
                                         <p>Reviewed by: {review.added_by}</p>
                                         <p>Rating: {review.rating}</p>
-                                        <p>Body: {review.reviewBody}</p>
+                                        <p>Review: {review.reviewBody}</p>
                                     </div>
                                 ))}
                             </div>
                             <div className="Top Picks"></div>
+                            <h4>Top Picks</h4>
                             {profiledata.topPicks.length !== 0 && profiledata.topPicks.map((review) => (
                                 <div className='review-item'>
-                                    <h4>Top Picks</h4>
                                     <p>{review.movie_name}</p>
                                 </div>
                             ))}
