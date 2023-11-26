@@ -129,59 +129,75 @@ const Profile = ({ user, setUser }) => {
         }
     }
     return (
-
-        <div className="user-profile">
+        <div className="page">
             {isEditing ? (
-                <form className='edit-profile' onSubmit={handleSave}>
-                    <label>
-                        Username:
-                        <input type="text" name="username" value={profiledata.username} onChange={handleChange} readOnly />
-                    </label>
-                    <label>
-                        Gender:
-                        {/* <input type="text" name="gender" value={profiledata.gender} onChange={handleChange} /> */}
-                        <select name="gender" value={profiledata.gender} onChange={handleChange}>
-                            <option value="" disabled hidden> </option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </label>
-                    <label>
-                        Date of Birth:
-                        <input type="date" name="dateOfBirth" value={profiledata.dateOfBirth} onChange={handleChange} />
-                    </label>
-                    <label>
-                        Country:
-                        <input type="text" name="country" value={profiledata.country} onChange={handleChange} />
-                    </label>
-                    <label>
-                        Profile Pic:
-                        <input type="file" accept="image/*" key={inputKey} onChange={handleImageChange} />
-                    </label>
-                    <label>
-                        Remove Profile Picture
-                        <input type="checkbox" onChange={handleRemovePic} />
-                    </label>
-                    <label>
-                        Date Joined:
-                        <input type="date" name="dateJoined" onChange={handleChange} value={profiledata.dateJoined} readOnly />
-                    </label>
-                    <button>Save</button>
+                <form onSubmit={handleSave}>
+                    <div className="First-user-profile">
+                        <div>{<img src={profiledata.profile_pic} alt="Profile" />}</div>
+                        <label>
+                            Username:
+                            <input type="text" name="username" value={profiledata.username} onChange={handleChange} readOnly />
+                        </label>
+                        <label>
+                            Gender:
+                            {/* <input type="text" name="gender" value={profiledata.gender} onChange={handleChange} /> */}
+                            <select name="gender" value={profiledata.gender} onChange={handleChange}>
+                                <option value="" disabled hidden> </option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </label>
+                        <label>
+                            Date of Birth:
+                            <input type="date" name="dateOfBirth" value={profiledata.dateOfBirth} onChange={handleChange} />
+                        </label>
+                        <label>
+                            Country:
+                            <input type="text" name="country" value={profiledata.country} onChange={handleChange} />
+                        </label>
+                        <label>
+                            Profile Pic:
+                            <input type="file" accept="image/*" key={inputKey} onChange={handleImageChange} />
+                        </label>
+                        <div className="remove-profile-picture">
+                            <label>
+                                Remove Profile Picture:
+                            </label>
+                            <input type="checkbox" className="checkbox" onChange={handleRemovePic} />
+
+                        </div>
+                        <label>
+                            Date Joined:
+                            <input type="date" name="dateJoined" onChange={handleChange} value={profiledata.dateJoined} readOnly />
+                        </label>
+                        <div className="save-button">
+                            <button>Save</button>
+                        </div>
+                    </div>
                 </form>
             ) : (
-                <div className="view-profile">
-                    <div className="profile-pic-container">
-                        <span className="profile-pic-label">Profile:</span>
-                        <img src={profiledata.profile_pic} alt="Profile" />
+                <div className="Second-user-profile">
+                    <div className="card profile-pic" style={{ width: "20%", height: "70%", backgroundColor: "#f3ce13", marginRight: "5%" }}>
+                        <img className="card-img-top " src={profiledata.profile_pic} alt="Profile" />
+                        <div className="card-body text-center">
+                            <p className="card-text">{profiledata.username}</p>
+                        </div>
                     </div>
-                    <p>Username: {profiledata.username}</p>
-                    <p>Gender: {profiledata.gender}</p>
-                    <p>Date of Birth: {profiledata.dateOfBirth}</p>
-                    <p>Country: {profiledata.country}</p>
-                    <p>Joined: {profiledata.dateJoined}</p>
-                    <p>User Reviews</p>
-                    {/* <div className='All-reviews'>
+                    <div className="card profile-info" style={{ width: "60%", height: "10%", backgroundColor: "#f3ce13" }}>
+                        <div className="card-body info">
+                            <p>Username: {profiledata.username} </p>
+                            <hr />
+                            <p>Gender: {profiledata.gender}</p>
+                            <hr />
+                            <p>Date of Birth: {profiledata.dateOfBirth}</p>
+                            <hr />
+                            <p>Country: {profiledata.country}</p>
+                            <hr />
+                            <p>Joined: {profiledata.dateJoined}</p>
+                            <hr />
+                            <button className="edit-profile" onClick={handleEditToggle}>Edit Profile</button>
+                            {/* <div className='All-reviews'>
                         {profiledata.reviews.length !== 0 && profiledata.reviews.map((review) => (
                             <div className='review-item'>
                                 <h4>{review.title}</h4>
@@ -199,7 +215,8 @@ const Profile = ({ user, setUser }) => {
                             <p>{review.movie_name}</p>
                         </div>
                     ))} */}
-                    <button onClick={handleEditToggle}>Edit Profile</button>
+                        </div>
+                    </div>
                 </div>
             )}
         </div>

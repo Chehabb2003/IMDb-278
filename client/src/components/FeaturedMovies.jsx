@@ -17,7 +17,7 @@ const FeaturedMovies = () => {
 
     return (
         <div className="featured-container">
-            <h2>Featured today</h2>
+            <h2>Featured Today</h2>
             <div className="card-container">
                 {featuredmovies.map((movie) => (
                     <div key={movie.id} className="card">

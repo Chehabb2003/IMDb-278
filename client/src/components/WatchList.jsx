@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 import '../styles/WatchList.css'
+
 
 const Watchlist = (/*{ user }*/) => {
     const [watchList, setWatchList] = useState([]);
@@ -41,7 +43,9 @@ const Watchlist = (/*{ user }*/) => {
         <div className="watch-list">
             {watchList && watchList.map((movie) => (
                 <div key={movie.id} className="card">
-                    <img className="card-img-top" src={movie.image} alt={movie.name} style={{ height: "380px", width: "100%" }} />
+                    <Link to={`/movie/${movie.id}`} className="link-no-underline">
+                        <img className="card-img-top" src={movie.image} alt={movie.name} style={{ height: "380px", width: "100%" }} />
+                    </Link>
                     <div className="card-body">
                         <button key={movie.id} onClick={() => handleWatchList(movie.id)}>Remove</button>
                     </div>
