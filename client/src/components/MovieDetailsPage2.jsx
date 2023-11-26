@@ -11,7 +11,11 @@ const MovieDetailsPage2 = ({ user, setUser }) => {
 
     useEffect(() => {
         fetchPage();
-    }, [watchListStatus]);
+    }, []);
+
+    useEffect(() => {
+        fetchWatchList();
+    }, []);
 
     // useEffect(() => {
     //     console.log(' Log when movie updates', movie);
@@ -23,23 +27,22 @@ const MovieDetailsPage2 = ({ user, setUser }) => {
             const response = await fetch(`http://localhost:5000/movie/${id}`);
             const movie_ = await response.json();
             setMovie(movie_);
-            const trailerUrl = await fetchYouTubeTrailer(movie.name);
+            const trailerUrl = await fetchYouTubeTrailer(movie_.name);
             setTrailerUrl(trailerUrl);
             const response1 = await fetch(`http://localhost:5000/actors/`);
             const actorsrecord = await response1.json();
             setActors(actorsrecord);
-            const response2 = await fetch(`http://localhost:5000/watchlist/checkwatchlist/${id}`);
-            const data = await response2.json();
-            console.log(data);
-            if (data === 'movie in watchlist') {
-                setWatchListStatus(true);
-            }
-            else if (data === 'movie not in watchlist') {
-                setWatchListStatus(false);
-            }
         }
         catch (error) {
             console.log(error);
+        }
+    }
+    const fetchWatchList = async () => {
+        const response2 = await fetch(`http://localhost:5000/watchlist/checkwatchlist/${id}`);
+        const data = await response2.json();
+        console.log(data);
+        if (data === 'movie in watchlist') {
+            setWatchListStatus(true);
         }
     }
 

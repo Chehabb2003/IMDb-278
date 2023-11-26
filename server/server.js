@@ -203,6 +203,7 @@ app.get('/movie/:id', async (req, res) => { //for moviesdetails1
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
+            console.log(docSnap.data());
             res.json(docSnap.data());
         } else {
             res.status(404).json({ error: 'Movie not found' });
@@ -341,7 +342,7 @@ app.get('/actors', async (req, res) => {
 
 app.get('/actorsdetails/:id', async (req, res) => {
     const actorId = req.params.id;
-    console.log(actorId);
+    // console.log(actorId);
     try {
         const actorRef = doc(actorsRef, actorId);
         const actorSnapshot = await getDoc(actorRef);
