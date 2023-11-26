@@ -169,7 +169,8 @@ app.get('/featured', async (req, res) => {   // getting featured movies
     try {
         const random = [];
         const snapshot = await getDocs(moviesRef);
-        const movies = snapshot.docs.map(doc => ({
+        const filtermovies = snapshot.docs.filter((doc) => doc.data().status !== 'coming soon');
+        const movies = filtermovies.map(doc => ({
             id: doc.id,
             ...doc.data()
         }));

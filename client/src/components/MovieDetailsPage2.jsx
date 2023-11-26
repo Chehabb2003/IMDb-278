@@ -159,9 +159,9 @@ const MovieDetailsPage2 = ({ user, setUser }) => {
                     <p>Director: {movie.director}</p>
                     <p>Writer: {movie.writer}</p>
                     <p>Rating: {movie.star}</p>
-                    <Link to={`/actors/${movie.movie_star}`} className="link-no-underline">
+                    {/* <Link to={`/actors/${movie.movie_star}`} className="link-no-underline">
                         <p>Star: {movie.movie_star}</p>
-                    </Link>
+                    </Link> */}
                     <p>More Actors:</p>
                 </div>
 

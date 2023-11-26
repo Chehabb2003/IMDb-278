@@ -38,9 +38,6 @@ const RecentMovies = () => {
                                 src={movie.image}
                                 alt={movie.name}
                             />
-                            <button key={movie.id}>
-                                Watch Trailer
-                            </button>
                         </Link>
                     </div>
                 ))}

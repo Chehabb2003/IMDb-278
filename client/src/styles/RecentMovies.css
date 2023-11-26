@@ -1,12 +1,13 @@
-.slider {
+.recent-movies {
+    display: flex;
+    flex-direction: column;
+    
     position: relative;
     overflow: hidden;
     width: 90%;
 }
 
-.slider button {
-    clear: left;
-}
+
 
 .recent-movies h2 {
     color: #f3ce13;
