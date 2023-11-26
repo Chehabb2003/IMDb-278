@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import '../styles/WatchList.css'
 
 const Watchlist = (/*{ user }*/) => {
     const [watchList, setWatchList] = useState([]);
