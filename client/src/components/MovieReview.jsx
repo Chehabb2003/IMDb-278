@@ -46,6 +46,7 @@ const MovieReview = () => {
 
     useEffect(() => {
         fetchReviews();
+        handleFilterChange();
     }, [reload])
 
 
@@ -76,19 +77,39 @@ const MovieReview = () => {
         }));
     }
 
+    // const handleFilterChange = (ratingValue, dateValue) => {
+    //     console.log(reviews);
+    //     if (ratingValue === 'highestToLowest') {
+    //         // console.log(reviews.sort((a, b) => b.rating - a.rating));
+    //         setReviewData(reviews.sort((a, b) => b.rating - a.rating));
+    //     }
+    //     else if (ratingValue === 'lowestToHighest') {
+    //         console.log(reviews);
+    //         console.log(reviews.sort((a, b) => a.rating - b.rating));
+    //         setReviewData(reviews.sort((a, b) => a.rating - b.rating));
+    //     }
+    //     if (dateValue === 'recent') {
+    //         setReviewData(reviews.sort((a, b) => new Date(a.created_at) - new Date(b.created_at)));
+    //     }
+    //     else if (dateValue === 'old') {
+    //         setReviewData(reviews.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)));
+    //     }
+    // };
     const handleFilterChange = (ratingValue, dateValue) => {
-        if (ratingValue === 'highestToLowest') {
-            setReviewData(reviews.sort((a, b) => b.rating - a.rating));
-        }
-        else if (ratingValue === 'lowestToHighest') {
-            setReviewData(reviews.sort((a, b) => a.rating - b.rating));
-        }
+        let sortedReviews = [...reviews];
+        // console.log(ratingValue);
         if (dateValue === 'recent') {
-            setReviewData(reviews.sort((a, b) => new Date(a.created_at) - new Date(b.created_at)));
+            sortedReviews.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        } else if (dateValue === 'old') {
+            sortedReviews.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
         }
-        else if (dateValue === 'old') {
-            setReviewData(reviews.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)));
+        if (ratingValue === 'highestToLowest') {
+            sortedReviews.sort((a, b) => b.rating - a.rating);
+        } else if (ratingValue === 'lowestToHighest') {
+            // console.log('here')
+            sortedReviews.sort((a, b) => a.rating - b.rating);
         }
+        Setreviews(sortedReviews);
     };
 
     // const handleChecked = async (e) => {

@@ -16,11 +16,11 @@ const Navbar = ({ user, setUser }) => {
     if (user) {
         name = user.name;
     }
-    const handleSearch = (e) => {
-        if (e.key === 'Enter') {
-            navigate(`/search?q=${searchValue}`);
-        }
-    }
+    // const handleSearch = (e) => {
+    //     if (e.key === 'Enter') {
+    //         navigate(`/search?q=${searchValue}`);
+    //     }
+    // }
     const handleSelect = (e) => {
         const value = e.target.value;
         e.target.value = name;
@@ -68,12 +68,12 @@ const Navbar = ({ user, setUser }) => {
             {!user && <nav className='navbar'>
                 <div className="navbar-div1">
 
-                    <Link to="/"><button className="imdb-button">IMDb</button></Link>
+                    <Link to="/"><button className="imdb-button">OMDb</button></Link>
                 </div>
                 <div className="navbar-div2">
-                    <input type="text" placeholder="Search IMDb" value={searchValue}
-                        onChange={(e) => SetSearchValue(e.target.value)}
-                        onKeyDown={(e) => handleSearch(e)}
+                    <input type="text" placeholder="Search OMDb" value={searchValue}
+                    /*onChange={(e) => SetSearchValue(e.target.value)}*/
+                    // onKeyDown={(e) => handleSearch(e)}
                     />
                 </div>
                 <div className="navbar-div3">
@@ -83,12 +83,12 @@ const Navbar = ({ user, setUser }) => {
             </nav>}
             {user && <nav className='navbar'>
                 <div className="navbar-div1">
-                    <Link to="/"><button className="imdb-button">IMDb</button></Link>
+                    <Link to="/"><button className="imdb-button">OMDb</button></Link>
                 </div>
                 <div className="navbar-div2">
-                    <input type="text" placeholder="Search IMDb" value={searchValue}
-                        onChange={(e) => SetSearchValue(e.target.value)}
-                        onKeyDown={(e) => handleSearch(e)}
+                    <input type="text" placeholder="Search OMDb" value={searchValue}
+                    // onChange={(e) => SetSearchValue(e.target.value)}
+                    // onKeyDown={(e) => handleSearch(e)}
                     />
                 </div>
                 <div className="navbar-div3">

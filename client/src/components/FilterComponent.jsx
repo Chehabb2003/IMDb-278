@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-
+import '../styles/FilterComponent.css';
 const FilterComponent = ({ onFilterChange }) => {
+
     const [ratingFilter, setRatingFilter] = useState('highestToLowest');
     const [dateFilter, setDateFilter] = useState('recent');
+
 
     const handleRatingChange = (e) => {
         setRatingFilter(e.target.value);
@@ -16,17 +18,19 @@ const FilterComponent = ({ onFilterChange }) => {
 
     return (
         <div>
-            <div>
+            <div className='filters-comp'>
                 <label >Sort by Rating:</label>
-                <select name="rating" value={ratingFilter} onChange={handleRatingChange}>
+                <select className='rate-filter' name="rating" /*value={ratingFilter}*/ defaultValue={""} onChange={handleRatingChange}>
+                    <option value="" hidden disabled></option>
                     <option value="highestToLowest">Highest to Lowest</option>
                     <option value="lowestToHighest">Lowest to Highest</option>
                 </select>
             </div>
 
-            <div>
+            <div className='filters-comp'>
                 <label >Sort by Date:</label>
-                <select name="date" value={dateFilter} onChange={handleDateChange}>
+                <select className='rate-filter' name="date" /*value={dateFilter}*/ defaultValue={""} onChange={handleDateChange}>
+                    <option value="" hidden disabled></option>
                     <option value="recent">Most Recent</option>
                     <option value="old">Oldest</option>
                 </select>
