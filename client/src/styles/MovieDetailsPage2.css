@@ -83,7 +83,6 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
   padding: 20px;
   background-color: #000;
   color: white;
@@ -92,7 +91,7 @@
 
 .card-container {
   flex: 0 0 25%;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .card {
@@ -123,14 +122,14 @@
 
 .movie-details2 {
   flex: 1;
-  max-width: 60%;
+  max-width: 30%;
   margin-bottom: 20px;
 }
 
 .movie-overview h2 {
   text-align: center;
   font-size: 50px;
-  margin-bottom: 5%;
+  margin-bottom: 3%;
 }
 
 .movie-information p {
@@ -140,7 +139,7 @@
 
 .movie-information {
   text-align: center;
-  margin-bottom: 2%;
+  margin-bottom: 1%;
 }
 
 .top-cast {
@@ -151,7 +150,7 @@
 
 .actor-item {
   text-align: center;
-  margin: 10px;
+  margin: 8px;
 }
 
 .actor-item img {
@@ -164,7 +163,14 @@
 .trailer {
   flex: 1;
   max-width: 30%;
-  margin-left: 20px;
+}
+
+.other-trailers2 {
+  background-color: #f3ce13;
+  color: #000;
+  padding: 1%;
+  border-radius: 5px;
+  margin-top: 35%;
 }
 
 .movie-review {
@@ -174,9 +180,32 @@
 
 .movie-review button {
   text-align: center;
-  border-radius: 4px ;
+  border-radius: 4px;
   background-color: #f3ce13;
   color: #000;
   padding: 1%;
   font-size: 15x;
+}
+
+/* Existing styles remain unchanged */
+
+/* Define a media query for smaller screens */
+@media (max-width: 768px) {
+  .movies-details-page2 {
+    flex-direction: column;
+    /* Change the flex direction to stack elements vertically */
+  }
+
+  .movie-details2 {
+    max-width: 100%;
+    /* Allow these elements to take full width */
+  }
+
+  .trailer {
+    display: none;
+  }
+
+  .other-trailers2 {
+    display: none;
+  }
 }

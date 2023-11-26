@@ -15,6 +15,7 @@ const MovieDetailsPage2 = ({ user, setUser }) => {
 
     useEffect(() => {
         fetchWatchList();
+        console.log(watchListStatus);
     }, []);
 
     // useEffect(() => {
@@ -38,14 +39,15 @@ const MovieDetailsPage2 = ({ user, setUser }) => {
         }
     }
     const fetchWatchList = async () => {
-        const response2 = await fetch(`http://localhost:5000/watchlist/checkwatchlist/${id}`);
+        const response2 = await fetch(`http://localhost:5000/watchlist/checkwatchlist/${id}`, {
+            headers: { Authorization: `Bearer ${window.localStorage.getItem('token')}` }
+        });
         const data = await response2.json();
         console.log(data);
         if (data === 'movie in watchlist') {
             setWatchListStatus(true);
         }
     }
-
     const addWatchList = async () => {
         const response = await fetch('http://localhost:5000/watchlist/additem', {
             method: 'POST',
@@ -64,6 +66,7 @@ const MovieDetailsPage2 = ({ user, setUser }) => {
         }
     }
     const removeWatchList = async () => {
+        console.log(id);
         const response = await fetch('http://localhost:5000/watchlist/deleteitem', {
             method: 'DELETE',
             headers: {
@@ -82,7 +85,7 @@ const MovieDetailsPage2 = ({ user, setUser }) => {
             const response = await fetch(
                 `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
                     movieName + ' official trailer'
-                )}&type=video&key=AIzaSyCTeNSTZktpP9-SmLhzubAn5Alx_qSAWEg`
+                )}&type=video&key=AIzaSyComs8eHvRAN_2yOYkK4sMhirB_QLEFj5w`
             );
 
             if (response.ok) {
@@ -173,7 +176,7 @@ const MovieDetailsPage2 = ({ user, setUser }) => {
                         {!watchListStatus ? (
                             <button onClick={addWatchList}>Add to Watchlist</button>
                         ) : (
-                            <button onClick={removeWatchList}>Already in WatchList</button>
+                            <button onClick={removeWatchList}>Added to WatchList</button>
                         )}
                     </div>
                 </div>
@@ -233,6 +236,19 @@ const MovieDetailsPage2 = ({ user, setUser }) => {
                     ></iframe>
                 )}
             </div>
+            <div className='other-trailers2'>
+                <button>
+                    <Link
+                        to={`https://www.youtube.com/results?search_query=${encodeURIComponent(
+                            `${movie.name} trailer`)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Other Trailers
+                    </Link>
+                </button>
+            </div>
+
         </div>
 
 

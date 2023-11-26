@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import '../styles/MovieDetailsPage.css'; // Import the CSS file
 
 const MovieDetailsPage = () => {
@@ -32,7 +32,7 @@ const MovieDetailsPage = () => {
             const response = await fetch(
                 `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
                     movieName + ' official trailer'
-                )}&type=video&key=AIzaSyCTeNSTZktpP9-SmLhzubAn5Alx_qSAWEg`
+                )}&type=video&key=AIzaSyComs8eHvRAN_2yOYkK4sMhirB_QLEFj5w`
             );
 
             if (response.ok) {
@@ -77,6 +77,18 @@ const MovieDetailsPage = () => {
                         <p>Director: {movie.director}</p>
                         <p>Writer: {movie.writer}</p>
                         <p>Rating: {movie.star}</p>
+                        <div className='other-trailers'>
+                            <button>
+                                <Link
+                                    to={`https://www.youtube.com/results?search_query=${encodeURIComponent(
+                                        `${movie.name} trailer`)}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Other Trailers
+                                </Link>
+                            </button>
+                        </div>
                     </div>
                     <div className="trailer">
                         {trailerUrl && (

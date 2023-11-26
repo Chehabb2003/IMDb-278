@@ -72,24 +72,26 @@ router.post('/additem', authenticateToken, async (req, res) => {
 
 
 router.delete('/deleteitem', authenticateToken, async (req, res) => {
-    const { movieId } = req.body;
+    const { id } = req.body;
     const { email } = req.user;
     const userSnap = await getDocs(usersRef);
     const user = userSnap.docs.find((doc) => doc.data().email === email);
     const watchlist = user.data().watchlist;
-    const filteredWatchList = watchlist.filter((movie) => movie.id != movieId);
+    console.log(watchlist);
+    const filteredWatchList = watchlist.filter((movie) => movie.id !== id)
+    // console.log('filtered:', filteredWatchList);
     await updateDoc(user.ref, { watchlist: filteredWatchList });
     res.json('movie successfully removed from watchlist');
 })
 
-
-router.get('/checkwatchlist/:id', async (req, res) => {
-    const { id } = req.params.id;
-    console.log(id);
+router.get('/checkwatchlist/:id', authenticateToken, async (req, res) => {
+    const id = req.params.id;
     if (req.user === undefined) {
         res.json('movie not in watchlist');
     }
     else {
+        const { email } = req.user;
+        console.log('here')
         const userSnap = await getDocs(usersRef);
         const user = userSnap.docs.find((doc) => doc.data().email === email)
         const movieFound = user.data().watchlist.some((movie) => movie.id === id);

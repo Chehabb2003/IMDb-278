@@ -38,7 +38,9 @@ const Profile = ({ user, setUser }) => {
                     dateOfBirth: data.dateOfBirth,
                     country: data.country,
                     dateJoined: data.createdAt,
-                    profile_pic: data.profile_pic
+                    profile_pic: data.profile_pic,
+                    topPicks: data.topPicks,
+                    reviews: data.reviews,
                 })
 
                 // console.log(profiledata);
@@ -59,6 +61,8 @@ const Profile = ({ user, setUser }) => {
         country: '',
         dateJoined: '',
         profile_pic: '',
+        topPicks: [],
+        reviews: [],
     })
     const [isEditing, setIsEditing] = useState(false);
     const [profileFile, setProfileFile] = useState({});
@@ -176,6 +180,25 @@ const Profile = ({ user, setUser }) => {
                     <p>Date of Birth: {profiledata.dateOfBirth}</p>
                     <p>Country: {profiledata.country}</p>
                     <p>Joined: {profiledata.dateJoined}</p>
+                    <p>User Reviews</p>
+                    {/* <div className='All-reviews'>
+                        {profiledata.reviews.length !== 0 && profiledata.reviews.map((review) => (
+                            <div className='review-item'>
+                                <h4>{review.title}</h4>
+                                <p>Created at: {formatDate(review.created_at)}</p>
+                                <p>Reviewed by: {review.added_by}</p>
+                                <p>Rating: {review.rating}</p>
+                                <p>Body: {review.reviewBody}</p>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="Top Picks"></div>
+                    {profiledata.topPicks.length !== 0 && profiledata.topPicks.map((review) => (
+                        <div className='review-item'>
+                            <h4>Top Picks</h4>
+                            <p>{review.movie_name}</p>
+                        </div>
+                    ))} */}
                     <button onClick={handleEditToggle}>Edit Profile</button>
                 </div>
             )}

@@ -40,9 +40,9 @@ const Navbar = ({ user, setUser }) => {
                 setUser(null);
                 navigate('/');
                 break;
-            case 'ratings':
-                // navigate('/');
-                break;
+            // case 'ratings':
+            //     navigate('/');
+            //     break;
             default:
                 break;
         }
@@ -119,7 +119,7 @@ const Navbar = ({ user, setUser }) => {
                         <select onChange={handleSelect} defaultValue={name}>
                             <option value={name} hidden>{name}</option>
                             <option value="view-profile">Profile</option>
-                            <option value="ratings">Ratings</option>
+                            {/* <option value="ratings">Ratings</option> */}
                             <option value="sign-out">Sign Out</option>
                         </select>
                     </div>

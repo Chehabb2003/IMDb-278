@@ -21,14 +21,14 @@ const Watchlist = (/*{ user }*/) => {
         fetchWatchList();
     }, [reload])
 
-    const handleWatchList = async (movieId) => {
+    const handleWatchList = async (id) => {
         const response = await fetch('http://localhost:5000/watchlist/deleteitem', {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${window.localStorage.getItem('token')}`,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ movieId })
+            body: JSON.stringify({ id })
         })
         const data = await response.json();
         if (data === 'movie successfully removed from watchlist') {
