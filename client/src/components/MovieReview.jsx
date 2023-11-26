@@ -150,24 +150,26 @@ const MovieReview = () => {
                     <button onClick={handleAddReview}>Submit Review</button>
                 </div>
                 <div className='view-reviews'>
-                    <h1>Reviews:</h1>
-                    <h3>{reviews.length !== 0 && reviews.review_count} Reviews:</h3>
+                    {/* <h1>Reviews:</h1> */}
+
                     <div className='filter'>
                         <FilterComponent onFilterChange={handleFilterChange} />
-                        {/* Sort By:
+                    </div>
+                    <h3>{reviews.length !== 0 && movie.review_count} Review(s):</h3>
+                    {/* Sort By:
                         <label>Ratings
                             <input type="checkbox" name='rating' checked={filter.rating} onChange={handleChecked} />
                         </label>
                         <label>Date
                             <input type="checkbox" name='date' checked={filter.date} onChange={handleChecked} />
                         </label> */}
-                        {/* Sort By:
+                    {/* Sort By:
                         <label>Ratings
                             <select onChange={ }>
                                 <option value="highesttolowest">Highest to Lowest</option>
                                 <option value="lowesttohighest">Lowest to Highest</option>
                                 {/* <input type="checkbox" name='rating' checked={filter.rating} onChange={handleChecked} /> */}
-                        {/* </select>
+                    {/* </select>
                         </label>
                         <label>Date
                             <select onChange={ }>
@@ -176,7 +178,7 @@ const MovieReview = () => {
                                 <input type="checkbox" name='rating' checked={filter.rating} onChange={handleChecked} />
                             </select>
                         </label>  */}
-                    </div>
+
                     <div className='All-reviews'>
                         {reviews.length !== 0 && reviews.map((review) => (
                             <div className='review-item'>

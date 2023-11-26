@@ -24,7 +24,7 @@ const { getStorage } = require('@firebase/storage');
 // };
 
 
-const firebaseConfig = { 
+const firebaseConfig = { // new
     apiKey: "AIzaSyCdXCDX3KmLfCSzCvyb6gtkNHsy5daGy7I",
     authDomain: "imdb-final-a70ca.firebaseapp.com",
     projectId: "imdb-final-a70ca",

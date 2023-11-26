@@ -91,9 +91,11 @@ router.get('/checkwatchlist/:id', authenticateToken, async (req, res) => {
     }
     else {
         const { email } = req.user;
+        console.log(email);
         console.log('here')
         const userSnap = await getDocs(usersRef);
         const user = userSnap.docs.find((doc) => doc.data().email === email)
+        console.log(user);
         const movieFound = user.data().watchlist.some((movie) => movie.id === id);
         console.log(movieFound);
         if (movieFound) {

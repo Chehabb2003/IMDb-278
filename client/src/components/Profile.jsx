@@ -198,23 +198,24 @@ const Profile = ({ user, setUser }) => {
                             <hr />
                             <button className="edit-profile" onClick={handleEditToggle}>Edit Profile</button>
                             {/* <div className='All-reviews'>
-                        {profiledata.reviews.length !== 0 && profiledata.reviews.map((review) => (
-                            <div className='review-item'>
-                                <h4>{review.title}</h4>
-                                <p>Created at: {formatDate(review.created_at)}</p>
-                                <p>Reviewed by: {review.added_by}</p>
-                                <p>Rating: {review.rating}</p>
-                                <p>Body: {review.reviewBody}</p>
+                                {profiledata.reviews.length !== 0 && profiledata.reviews.map((review) => (
+                                    <div className='review-item'>
+                                        <h4>{review.title}</h4>
+                                        <p>Created at: {(review.created_at)}</p>
+                                        <p>Reviewed by: {review.added_by}</p>
+                                        <p>Rating: {review.rating}</p>
+                                        <p>Body: {review.reviewBody}</p>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
-                    </div>
-                    <div className="Top Picks"></div>
-                    {profiledata.topPicks.length !== 0 && profiledata.topPicks.map((review) => (
-                        <div className='review-item'>
-                            <h4>Top Picks</h4>
-                            <p>{review.movie_name}</p>
-                        </div>
-                    ))} */}
+                            <div className="Top Picks">
+                                {profiledata.topPicks.length !== 0 && profiledata.topPicks.map((review) => (
+                                    <div className='review-item'>
+                                        <h4>Top Picks</h4>
+                                        <p>{review.movie_name}</p>
+                                    </div>
+                                ))}
+                            </div> */}
                         </div>
                     </div>
                 </div>
