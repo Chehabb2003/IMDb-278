@@ -15,7 +15,7 @@ const MovieDetailsPage2 = ({ user, setUser }) => {
 
     useEffect(() => {
         fetchWatchList();
-        console.log(watchListStatus);
+        // console.log(watchListStatus);
     }, []);
 
     // useEffect(() => {

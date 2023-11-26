@@ -322,13 +322,39 @@ app.get('/actors', async (req, res) => {
 });
 
 // app.get('/overwrite', async (req, res) => {
-//     const movieSnapshot = await getDocs(moviesRef);
-//     let newfield = { reviews: [] };
-//     for (const doc of movieSnapshot.docs) {
-//         await updateDoc(doc.ref, newfield);
+//     // for (var i = 0; i < 60; i++) {
+//     //     let newfield = {
+//     //         name: '',
+//     //         bio: '',
+//     //         dob: '',
+//     //         image: '',
+//     //         movies: []
+//     //     };
+//     //     addDoc(actorsRef, newfield);
+//     // }
+//     // res.json('success');
+//     try {
+//         const moviesSnap = await getDocs(moviesRef);
+//         const updatePromises = moviesSnap.docs.map(doc => {
+//             let newfield = { watchlist: [] };
+//             return updateDoc(doc.ref, newfield);
+//         });
+
+//         await Promise.all(updatePromises); // Wait for all update operations to complete
+//         console.log("All documents updated successfully");
+//     } catch (error) {
+//         console.error("Error updating documents: ", error);
 //     }
-//     res.json('success');
+
 // });
+app.get('/overwrite', async (req, res) => {
+    const movieSnapshot = await getDocs(moviesRef);
+    let newfield = { watchlist: [] };
+    for (const doc of movieSnapshot.docs) {
+        await updateDoc(doc.ref, newfield);
+    }
+    res.json('success');
+})
 
 // app.get('/createcollection', async (req, res) => {
 

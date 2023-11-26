@@ -2,7 +2,6 @@ import '../styles/navbar.css';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-
 const Navbar = ({ user, setUser }) => {
     const [searchValue, SetSearchValue] = useState('');
     const navigate = useNavigate();
@@ -22,12 +21,6 @@ const Navbar = ({ user, setUser }) => {
             navigate(`/search?q=${searchValue}`);
         }
     }
-    // const resetdb = async () => {
-    //     const response = await fetch('http://localhost:5000/overwrite')
-    //     if (response.ok) {
-    //         console.log('sucess');
-    //     }
-    // }
     const handleSelect = (e) => {
         const value = e.target.value;
         e.target.value = name;
@@ -40,9 +33,9 @@ const Navbar = ({ user, setUser }) => {
                 setUser(null);
                 navigate('/');
                 break;
-            // case 'ratings':
-            //     navigate('/');
-            //     break;
+            case 'ratings':
+                // navigate('/');
+                break;
             default:
                 break;
         }
@@ -73,7 +66,6 @@ const Navbar = ({ user, setUser }) => {
             fetchProfile();
         }
     }, [user])
-
     return (
         <div className="navbars">
             {!user && <nav className='navbar'>
@@ -94,8 +86,7 @@ const Navbar = ({ user, setUser }) => {
             </nav>}
             {user && <nav className='navbar'>
                 <div className="navbar-div1">
-
-                    <Link to="/"><button /*onClick={resetdb}*/ className="imdb-button">IMDb</button></Link>
+                    <Link to="/"><button className="imdb-button">IMDb</button></Link>
                 </div>
                 <div className="navbar-div2">
                     <input type="text" placeholder="Search IMDb" value={searchValue}
@@ -104,30 +95,33 @@ const Navbar = ({ user, setUser }) => {
                     />
                 </div>
                 <div className="navbar-div3">
-                    <Link to='/watchlist'><button>Watchlist</button></Link>
-
+                    <div>
+                        <Link to='/watchlist'><button>Watchlist</button></Link>
+                    </div>
                     <div>
                         {profilePic.found ? (
                             <div>
                                 <img src={profilePic.src} alt="Profile" />
                             </div>
                         ) : (
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" className="bi bi-person-fill" viewBox="0 0 16 16">
-                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                            </svg>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" className="bi bi-person-fill" viewBox="0 0 16 16">
+                                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                                </svg>
+                            </div>
                         )}
+                    </div>
+                    <div>
                         <select onChange={handleSelect} defaultValue={name}>
                             <option value={name} hidden>{name}</option>
                             <option value="view-profile">Profile</option>
-                            {/* <option value="ratings">Ratings</option> */}
+                            <option value="ratings">Ratings</option>
                             <option value="sign-out">Sign Out</option>
                         </select>
                     </div>
-
                 </div>
             </nav>}
         </div >
     );
 }
-
 export default Navbar;

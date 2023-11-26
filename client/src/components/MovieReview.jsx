@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../styles/MovieReview.css';
+import FilterComponent from './FilterComponent';
 
 const MovieReview = () => {
     const { id } = useParams();
@@ -13,32 +14,38 @@ const MovieReview = () => {
     });
     const [reviews, Setreviews] = useState([]);
     const [reload, setReload] = useState(0);
-    const [filter, setFilter] = useState({
-        date: false,
-        rating: false
-    })
+    // const [filter, setFilter] = useState({
+    //     date: false,
+    //     rating: false
+    // })
 
-    const fetchPage = async () => {
+    const fetchMovie = async () => {
         try {
             const response = await fetch(`http://localhost:5000/movie/${id}`);
             const movie_ = await response.json();
             console.log(movie_);
             setMovie(movie_);
-            const response1 = await fetch(`http://localhost:5000/reviews/${id}`);
-            const data = await response1.json();
-            console.log(data);
-            if (data.message === 'success') {
-                Setreviews(data.reviews);
-            }
             // console.log(reviews.length);
         }
         catch (error) {
             console.log(error);
         }
     }
+    const fetchReviews = async () => {
+        const response1 = await fetch(`http://localhost:5000/reviews/${id}`);
+        const data = await response1.json();
+        console.log(data);
+        if (data.message === 'success') {
+            Setreviews(data.reviews);
+        }
+    }
 
     useEffect(() => {
-        fetchPage();
+        fetchMovie();
+    }, [])
+
+    useEffect(() => {
+        fetchReviews();
     }, [reload])
 
 
@@ -69,23 +76,38 @@ const MovieReview = () => {
         }));
     }
 
-    const handleChecked = async (e) => {
-        const { name, checked } = e.target;
-        setFilter(prevFilter => ({
-            ...prevFilter,
-            [name]: checked
-        }));
-        executeFilter();
-    }
-
-    const executeFilter = () => {
-        if (filter.rating) {
+    const handleFilterChange = (ratingValue, dateValue) => {
+        if (ratingValue === 'highestToLowest') {
             setReviewData(reviews.sort((a, b) => b.rating - a.rating));
         }
-        if (filter.date) {
-            setReviewData(reviews.sort((a, b) => new Date(a.date) - new Date(b.date)));
+        else if (ratingValue === 'lowestToHighest') {
+            setReviewData(reviews.sort((a, b) => a.rating - b.rating));
         }
-    }
+        if (dateValue === 'recent') {
+            setReviewData(reviews.sort((a, b) => new Date(a.created_at) - new Date(b.created_at)));
+        }
+        else if (dateValue === 'old') {
+            setReviewData(reviews.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)));
+        }
+    };
+
+    // const handleChecked = async (e) => {
+    //     const { name, checked } = e.target;
+    //     setFilter(prevFilter => ({
+    //         ...prevFilter,
+    //         [name]: checked
+    //     }));
+    //     executeFilter();
+    // }
+
+    // const executeFilter = () => {
+    //     if (filter.rating) {
+    //         setReviewData(reviews.sort((a, b) => b.rating - a.rating));
+    //     }
+    //     if (filter.date) {
+    //         setReviewData(reviews.sort((a, b) => new Date(a.date) - new Date(b.date)));
+    //     }
+    // }
     const formatDate = (isoString) => {
         const date = new Date(isoString);
         const year = date.getFullYear();
@@ -131,14 +153,29 @@ const MovieReview = () => {
                     <h1>Reviews:</h1>
                     <h3>{reviews.length !== 0 && reviews.review_count} Reviews:</h3>
                     <div className='filter'>
-                        Sort By:
+                        <FilterComponent onFilterChange={handleFilterChange} />
+                        {/* Sort By:
                         <label>Ratings
                             <input type="checkbox" name='rating' checked={filter.rating} onChange={handleChecked} />
                         </label>
                         <label>Date
                             <input type="checkbox" name='date' checked={filter.date} onChange={handleChecked} />
+                        </label> */}
+                        {/* Sort By:
+                        <label>Ratings
+                            <select onChange={ }>
+                                <option value="highesttolowest">Highest to Lowest</option>
+                                <option value="lowesttohighest">Lowest to Highest</option>
+                                {/* <input type="checkbox" name='rating' checked={filter.rating} onChange={handleChecked} /> */}
+                        {/* </select>
                         </label>
-
+                        <label>Date
+                            <select onChange={ }>
+                                <option value="recent">Newest</option>
+                                <option value="old">Oldest</option>
+                                <input type="checkbox" name='rating' checked={filter.rating} onChange={handleChecked} />
+                            </select>
+                        </label>  */}
                     </div>
                     <div className='All-reviews'>
                         {reviews.length !== 0 && reviews.map((review) => (
