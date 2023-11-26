@@ -85,7 +85,7 @@ const MovieDetailsPage2 = ({ user, setUser }) => {
             const response = await fetch(
                 `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
                     movieName + ' trailer'
-                )}&type=video&key=AIzaSyComs8eHvRAN_2yOYkK4sMhirB_QLEFj5w`
+                )}&type=video&key=AIzaSyB_fUnmMdI7sEGahGL9LFHr8lvTWb3QA40`
             );
 
             if (response.ok) {
