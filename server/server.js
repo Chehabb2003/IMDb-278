@@ -276,16 +276,21 @@ app.post('/reviews/:id', authenticateToken, async (req, res) => {
         }
         await updateDoc(movie.ref, updatedData);
 
-        let prevUserReviews = user.data().reviews || [];
+        let prevUserReviews = user.data().reviews /*|| []*/;
         prevUserReviews.push(newReview);
         if (rating >= 8) {
             let prevTopPicks = user.data().topPicks;
             const found = prevTopPicks.some((review) => review.movie_name === newReview.movie_name)
-            if (found) {
+            if (!found) {
                 prevTopPicks.push(newReview);
                 updatedData = {
                     reviews: prevUserReviews,
                     topPicks: prevTopPicks
+                }
+            }
+            else {
+                updatedData = {
+                    reviews: prevUserReviews
                 }
             }
         }
