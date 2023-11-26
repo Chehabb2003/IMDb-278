@@ -40,18 +40,22 @@ const MovieReview = () => {
         }
     }
 
-    useEffect(() => {
-        fetchMovie();
-    }, [])
+    // useEffect(() => {
+    //     fetchMovie();
+    // }, [])
 
     useEffect(() => {
+        fetchMovie();
         fetchReviews();
         // handleFilterChange();
     }, [reload])
 
 
     const handleAddReview = async () => {
-        console.log(reviewData);
+        if (parseInt(reviewData.rating) > 10 || parseInt(reviewData.rating < 10)) {
+            alert('Please enter a rating between 1 and 10');
+            return;
+        }
         const response = await fetch(`http://localhost:5000/reviews/${id}`, {
             method: 'POST',
             headers: {

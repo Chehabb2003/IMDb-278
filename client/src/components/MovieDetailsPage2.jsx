@@ -220,7 +220,7 @@ const MovieDetailsPage2 = ({ user, setUser }) => {
                 </div>
 
                 <div className="movie-review">
-                    <button onClick={handleReviewPage}>View Movie Reviews</button>
+                    <button onClick={handleReviewPage}>Movie Reviews</button>
                 </div>
             </div>
 

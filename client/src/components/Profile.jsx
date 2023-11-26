@@ -140,21 +140,22 @@ const Profile = ({ user, setUser }) => {
     return (
         <div className="page">
             {isEditing ? (
-                <form onSubmit={handleSave}>
-                    <div className="First-user-profile">
-                        <div>{<img src={profiledata.profile_pic} alt="Profile" />}</div>
+                <form onSubmit={handleSave} className="edit-form">
+                    <div className="profile-picture">
+                        <img src={profiledata.profile_pic} alt="Profile" />
+                    </div>
+                    <div className="input-fields">
                         <label>
                             Username:
                             <input type="text" name="username" value={profiledata.username} onChange={handleChange} readOnly />
                         </label>
                         <label>
                             Gender:
-                            {/* <input type="text" name="gender" value={profiledata.gender} onChange={handleChange} /> */}
                             <select name="gender" value={profiledata.gender} onChange={handleChange}>
                                 <option value="" disabled hidden> </option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="other">Other</option>
+                                <option value="male">male</option>
+                                <option value="female">female</option>
+                                <option value="other">other</option>
                             </select>
                         </label>
                         <label>
@@ -174,7 +175,6 @@ const Profile = ({ user, setUser }) => {
                                 Remove Profile Picture:
                             </label>
                             <input type="checkbox" className="checkbox" onChange={handleRemovePic} />
-
                         </div>
                         <label>
                             Date Joined:
@@ -186,43 +186,36 @@ const Profile = ({ user, setUser }) => {
                     </div>
                 </form>
             ) : (
-                <div className="Second-user-profile">
-                    <div className="card profile-pic" style={{ width: "20%", height: "70%", backgroundColor: "#f3ce13", marginRight: "5%" }}>
-                        <img className="card-img-top " src={profiledata.profile_pic} alt="Profile" />
-                        <div className="card-body text-center">
-                            <p className="card-text">{profiledata.username}</p>
-                        </div>
+                <div className="view-profile">
+                    <div className="profile-picture">
+                        <img src={profiledata.profile_pic} alt="Profile" />
                     </div>
-                    <div className="card profile-info" style={{ width: "60%", height: "10%", backgroundColor: "#f3ce13" }}>
-                        <div className="card-body info">
-                            <p>Username: {profiledata.username} </p>
-                            <hr />
+                    <div className="profile-info">
+                        <p className="username">{profiledata.username}</p>
+                        <div className="details">
                             <p>Gender: {profiledata.gender}</p>
-                            <hr />
                             <p>Date of Birth: {profiledata.dateOfBirth}</p>
-                            <hr />
                             <p>Country: {profiledata.country}</p>
-                            <hr />
                             <p>Joined: {profiledata.dateJoined}</p>
-                            <hr />
-                            <button className="edit-profile" onClick={handleEditToggle}>Edit Profile</button>
-                            <div className='All-reviews'>
-                                <h4>Top picks</h4>
-                                {profiledata.reviews.length !== 0 && profiledata.reviews.map((review) => (
-                                    <div className='review-item'>
-                                        <h3>Movie: {review.movie_name}</h3>
-                                        <h4>{review.title}</h4>
-                                        <p>Created at: {formatDate(review.created_at)}</p>
-                                        <p>Reviewed by: {review.added_by}</p>
-                                        <p>Rating: {review.rating}</p>
-                                        <p>Review: {review.reviewBody}</p>
-                                    </div>
-                                ))}
-                            </div>
-                            <div className="Top Picks"></div>
+                        </div>
+                        <button className="edit-profile" onClick={handleEditToggle}>Edit Profile</button>
+                        <div className='All-reviews'>
+                            <h4>Ratings and Reviews</h4>
+                            {profiledata.reviews.length !== 0 && profiledata.reviews.map((review, index) => (
+                                <div className='review-item' key={index}>
+                                    <h3>Movie: {review.movie_name}</h3>
+                                    <h4>{review.title}</h4>
+                                    <p>Created at: {formatDate(review.created_at)}</p>
+                                    <p>Reviewed by: {review.added_by}</p>
+                                    <p>Rating: {review.rating}</p>
+                                    <p>Review: {review.reviewBody}</p>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="Top-Picks">
                             <h4>Top Picks</h4>
-                            {profiledata.topPicks.length !== 0 && profiledata.topPicks.map((review) => (
-                                <div className='review-item'>
+                            {profiledata.topPicks.length !== 0 && profiledata.topPicks.map((review, index) => (
+                                <div className='review-item' key={index}>
                                     <p>{review.movie_name}</p>
                                 </div>
                             ))}
