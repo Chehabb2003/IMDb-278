@@ -6,16 +6,17 @@ const MovieDetailsPage2 = ({ user, setUser }) => {
     const [movie, setMovie] = useState({});
     const [trailerUrl, setTrailerUrl] = useState('');
     const [actorslist, setActors] = useState([]);
+    const [watchListStatus, setWatchListStatus] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
         fetchPage();
-    }, [])
+    }, [watchListStatus]);
 
-    useEffect(() => {
-        console.log(' Log when movie updates', movie);
-        console.log('Log when trailerUrl updates', trailerUrl); // Log when trailerUrl updates
-    }, [movie, trailerUrl]);
+    // useEffect(() => {
+    //     console.log(' Log when movie updates', movie);
+    //     console.log('Log when trailerUrl updates', trailerUrl); // Log when trailerUrl updates
+    // }, [movie, trailerUrl]);
 
     const fetchPage = async () => {
         try {
@@ -23,18 +24,26 @@ const MovieDetailsPage2 = ({ user, setUser }) => {
             const movie_ = await response.json();
             setMovie(movie_);
             const trailerUrl = await fetchYouTubeTrailer(movie.name);
+            setTrailerUrl(trailerUrl);
             const response1 = await fetch(`http://localhost:5000/actors/`);
             const actorsrecord = await response1.json();
-
             setActors(actorsrecord);
-            setTrailerUrl(trailerUrl);
+            const response2 = await fetch(`http://localhost:5000/watchlist/checkwatchlist/${id}`);
+            const data = await response2.json();
+            console.log(data);
+            if (data === 'movie in watchlist') {
+                setWatchListStatus(true);
+            }
+            else if (data === 'movie not in watchlist') {
+                setWatchListStatus(false);
+            }
         }
         catch (error) {
             console.log(error);
         }
     }
 
-    const handleWatchList = async () => {
+    const addWatchList = async () => {
         const response = await fetch('http://localhost:5000/watchlist/additem', {
             method: 'POST',
             headers: {
@@ -44,11 +53,25 @@ const MovieDetailsPage2 = ({ user, setUser }) => {
             body: JSON.stringify({ id })
         })
         const data = await response.json();
-        console.log(data.message);
+        setWatchListStatus(true);
         if (data.message !== 'success') {
-            // setUser(null);
             alert('Please login to add to Watchlist');
+            setUser(null);
             navigate('/registration');
+        }
+    }
+    const removeWatchList = async () => {
+        const response = await fetch('http://localhost:5000/watchlist/deleteitem', {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${window.localStorage.getItem('token')}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id })
+        })
+        const data = await response.json();
+        if (data === 'movie successfully removed from watchlist') {
+            setWatchListStatus(false);
         }
     }
     const fetchYouTubeTrailer = async (movieName) => {
@@ -144,7 +167,11 @@ const MovieDetailsPage2 = ({ user, setUser }) => {
                         style={{ height: "380px", width: "100%" }}
                     />
                     <div className="card-body">
-                        <button onClick={handleWatchList}>Add to Watchlist</button>
+                        {!watchListStatus ? (
+                            <button onClick={addWatchList}>Add to Watchlist</button>
+                        ) : (
+                            <button onClick={removeWatchList}>Already in WatchList</button>
+                        )}
                     </div>
                 </div>
             </div>

@@ -138,7 +138,6 @@ app.get('/recentmovies', async (req, res) => {
         const movies = snapshot.docs.map(doc => ({
             id: doc.id,
             ...doc.data()
-
         }));
         const notComingSoonMovies = movies.filter(movie => movie.status !== 'coming soon');
         res.json(notComingSoonMovies.slice(-5)); // Return last 5 movies

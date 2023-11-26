@@ -24,9 +24,8 @@ const MovieDetailsPage = () => {
                 console.error('Error fetching movie details', error);
             }
         };
-
         fetchMovieDetails();
-    }, [id]);
+    }, []);
 
     const fetchYouTubeTrailer = async (movieName) => {
         try {
@@ -50,7 +49,6 @@ const MovieDetailsPage = () => {
             console.error('Error fetching trailer:', error);
         }
     };
-
     return (
         // <div className="content">
         //     {movie && (
@@ -97,7 +95,6 @@ const MovieDetailsPage = () => {
             )
             }
         </div >
-
     );
 };
 
